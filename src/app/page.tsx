@@ -1,202 +1,154 @@
 import Link from "next/link";
+import { ArrowRight, CalendarClock, LockKeyhole, Sparkles } from "lucide-react";
 
 const features = [
   {
-    number: "01",
     title: "Gedanken festhalten",
-    text: "Schreibe eine Nachricht, die nur für dein zukünftiges Ich bestimmt ist.",
+    text: "Ich speichere Nachrichten, Ziele oder Erinnerungen für einen späteren Zeitpunkt.",
+    icon: Sparkles,
   },
   {
-    number: "02",
-    title: "Zeit bestimmen",
-    text: "Lege fest, wann deine Kapsel wieder geöffnet werden darf.",
+    title: "Öffnungsdatum wählen",
+    text: "Jede Zeitkapsel bekommt ein Datum, ab dem sie wieder sichtbar wird.",
+    icon: CalendarClock,
   },
   {
-    number: "03",
-    title: "Später wiederfinden",
-    text: "Öffne deine Nachricht zum richtigen Zeitpunkt und sieh zurück.",
+    title: "Privat verwahren",
+    text: "Meine Kapseln bleiben Teil meiner persönlichen Sammlung und sind nur für mich bestimmt.",
+    icon: LockKeyhole,
   },
 ];
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main className="min-h-screen overflow-hidden bg-[#0b1020] text-slate-100">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(91,71,190,0.42),_transparent_34%),radial-gradient(circle_at_90%_20%,_rgba(35,185,162,0.2),_transparent_28%),linear-gradient(160deg,#0b1020_0%,#12142c_55%,#11182c_100%)]" />
+    <main className="min-h-screen bg-[#070b1a] text-slate-100">
+      <section className="min-h-screen bg-[linear-gradient(135deg,_rgba(38,29,78,0.95)_0%,_rgba(10,18,38,0.98)_45%,_rgba(9,31,55,0.95)_100%)] px-6 py-8">
+        <div className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-6xl flex-col">
+          <header className="flex items-center justify-between gap-6">
+            <Link href="/" className="flex items-center gap-3">
+              <span className="grid h-11 w-11 place-items-center rounded-2xl border border-[#e4b957]/20 bg-[#e4b957]/10 text-[#e4b957]">
+                <Sparkles size={22} strokeWidth={1.8} />
+              </span>
 
-      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
-        <Link href="/" className="text-2xl font-bold tracking-tight">
-          Zeit<span className="text-teal-300">kapsel</span>
-        </Link>
-
-        <nav className="hidden items-center gap-7 text-sm text-slate-400 md:flex">
-          <a href="#idee" className="transition hover:text-white">
-            Die Idee
-          </a>
-          <a href="#deine-zeit" className="transition hover:text-white">
-            Deine Zeit
-          </a>
-        </nav>
-
-        <Link
-          href="/login"
-          className="rounded-xl border border-slate-600 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-teal-300 hover:text-teal-200"
-        >
-          Anmelden
-        </Link>
-      </header>
-
-      <section className="mx-auto grid w-full max-w-6xl gap-14 px-6 pb-20 pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pt-24">
-        <div>
-          <p className="mb-5 text-sm font-semibold uppercase tracking-[0.25em] text-teal-300">
-            Nachrichten für später
-          </p>
-
-          <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight sm:text-6xl">
-            Schreib heute.
-            <br />
-            <span className="text-teal-300">Öffne morgen.</span>
-          </h1>
-
-          <p className="mt-7 max-w-xl text-lg leading-8 text-slate-300">
-            Zeitkapsel ist dein persönlicher Ort für Gedanken, Erinnerungen und
-            Wünsche. Erstelle Nachrichten für dein zukünftiges Ich und öffne sie
-            erst dann, wenn die Zeit gekommen ist.
-          </p>
-
-          <div className="mt-9 flex flex-wrap gap-4">
-            <a
-              href="#idee"
-              className="rounded-xl bg-teal-300 px-6 py-3 font-semibold text-slate-950 transition hover:bg-teal-200"
-            >
-              Mehr entdecken
-            </a>
-
-            <Link
-              href="/login"
-              className="rounded-xl border border-slate-600 px-6 py-3 font-semibold text-slate-100 transition hover:border-slate-400"
-            >
-              Zur Anmeldung
+              <div>
+                <p className="font-serif text-2xl font-semibold text-white">
+                  Zeitkapsel
+                </p>
+                <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                  Erinnerungen für später
+                </p>
+              </div>
             </Link>
-          </div>
 
-          <div className="mt-10 flex flex-wrap gap-5 text-sm text-slate-400">
-            <span>✦ Private Nachrichten</span>
-            <span>✦ Öffnungsdatum festlegen</span>
-            <span>✦ Eigene Erinnerungen</span>
-          </div>
-        </div>
-
-        <section className="rounded-[2rem] border border-slate-700/80 bg-slate-950/40 p-6 shadow-2xl shadow-black/30 backdrop-blur">
-          <div className="flex items-center justify-between border-b border-slate-700/70 pb-5">
-            <div>
-              <p className="text-sm text-slate-400">Deine nächste Zeitkapsel</p>
-              <h2 className="mt-1 text-xl font-bold">Für mein Zukunfts-Ich</h2>
-            </div>
-
-            <span className="rounded-full border border-teal-300/30 bg-teal-300/10 px-3 py-1 text-xs font-semibold text-teal-200">
-              Verschlossen
-            </span>
-          </div>
-
-          <div className="mt-6 rounded-2xl border border-slate-700/80 bg-slate-900/70 p-6">
-            <p className="text-sm font-medium uppercase tracking-[0.2em] text-teal-300">
-              Öffnet am
-            </p>
-
-            <p className="mt-3 text-3xl font-bold">17. August 2027</p>
-
-            <div className="mt-6 h-2 overflow-hidden rounded-full bg-slate-700">
-              <div className="h-full w-1/4 rounded-full bg-teal-300" />
-            </div>
-
-            <div className="mt-5 flex items-center justify-between text-sm">
-              <span className="text-slate-400">Erstellt heute</span>
-              <span className="font-medium text-teal-200">Noch 365 Tage</span>
-            </div>
-          </div>
-
-          <div className="mt-5 grid grid-cols-3 gap-3 text-center">
-            <div className="rounded-xl bg-slate-900/80 p-3">
-              <p className="text-xl font-bold text-teal-300">3</p>
-              <p className="mt-1 text-xs text-slate-400">Kapseln</p>
-            </div>
-
-            <div className="rounded-xl bg-slate-900/80 p-3">
-              <p className="text-xl font-bold text-teal-300">2</p>
-              <p className="mt-1 text-xs text-slate-400">Verschlossen</p>
-            </div>
-
-            <div className="rounded-xl bg-slate-900/80 p-3">
-              <p className="text-xl font-bold text-teal-300">1</p>
-              <p className="mt-1 text-xs text-slate-400">Geöffnet</p>
-            </div>
-          </div>
-        </section>
-      </section>
-
-      <section id="idee" className="border-y border-slate-800 bg-slate-950/30 py-20">
-        <div className="mx-auto w-full max-w-6xl px-6">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-teal-300">
-            Deine Erinnerungen, deine Zeit
-          </p>
-
-          <h2 className="mt-3 max-w-2xl text-3xl font-bold">
-            Nicht alles muss sofort gelesen werden.
-          </h2>
-
-          <p className="mt-4 max-w-2xl leading-7 text-slate-400">
-            Manche Gedanken ergeben erst später Sinn. Mit Zeitkapsel bewahrst du
-            sie auf, ohne sie zu verlieren.
-          </p>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
-            {features.map((feature) => (
-              <article
-                key={feature.number}
-                className="rounded-2xl border border-slate-700/80 bg-[#151a31] p-6"
+            <nav className="flex items-center gap-3">
+              <Link
+                href="/login"
+                className="rounded-2xl border border-[#e4b957]/20 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-[#e4b957]/50 hover:text-[#e4b957]"
               >
-                <p className="text-2xl font-bold text-teal-300">
-                  {feature.number}
-                </p>
+                Anmelden
+              </Link>
 
-                <h3 className="mt-5 text-xl font-semibold">{feature.title}</h3>
+              <Link
+                href="/dashboard"
+                className="rounded-2xl bg-[#e4b957] px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-[#f0ca70]"
+              >
+                Zur App
+              </Link>
+            </nav>
+          </header>
 
-                <p className="mt-3 text-sm leading-6 text-slate-400">
-                  {feature.text}
-                </p>
-              </article>
-            ))}
+          <div className="grid flex-1 items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr]">
+            <section>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#e4b957]">
+                Digitale Zeitkapseln
+              </p>
+
+              <h1 className="mt-5 max-w-4xl font-serif text-5xl font-semibold leading-tight text-white sm:text-6xl">
+                Erinnerungen bewahren, bis der richtige Moment gekommen ist.
+              </h1>
+
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+                Mit Zeitkapsel halte ich persönliche Nachrichten, Gedanken und
+                Ziele fest. Jede Kapsel bekommt ein Öffnungsdatum und bleibt bis
+                dahin in meiner Sammlung sichtbar als versiegelter Eintrag.
+              </p>
+
+              <div className="mt-9 flex flex-wrap gap-4">
+                <Link
+                  href="/kapseln/neu"
+                  className="inline-flex items-center gap-2 rounded-2xl bg-[#e4b957] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#e4b957]/10 transition hover:bg-[#f0ca70]"
+                >
+                  Zeitkapsel erstellen
+                  <ArrowRight size={18} strokeWidth={2} />
+                </Link>
+
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 rounded-2xl border border-[#e4b957]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#e4b957] hover:text-[#e4b957]"
+                >
+                  Dashboard ansehen
+                </Link>
+              </div>
+            </section>
+
+            <section className="rounded-3xl border border-[#e4b957]/15 bg-[linear-gradient(145deg,_rgba(28,34,67,0.94),_rgba(45,37,82,0.88))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e4b957]">
+                Beispiel-Kapsel
+              </p>
+
+              <h2 className="mt-4 font-serif text-3xl font-semibold text-white">
+                Brief an mein zukünftiges Ich
+              </h2>
+
+              <p className="mt-4 leading-7 text-slate-400">
+                Eine Nachricht mit Gedanken, Zielen und Erinnerungen, die erst
+                zu einem späteren Zeitpunkt wieder geöffnet wird.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-white/5 bg-slate-950/25 p-4">
+                  <p className="text-sm text-slate-500">Status</p>
+                  <p className="mt-2 font-semibold text-[#e4b957]">
+                    versiegelt
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-white/5 bg-slate-950/25 p-4">
+                  <p className="text-sm text-slate-500">Öffnet am</p>
+                  <p className="mt-2 font-semibold text-slate-100">
+                    15. Januar 2030
+                  </p>
+                </div>
+              </div>
+            </section>
           </div>
+
+          <section className="grid gap-4 pb-8 md:grid-cols-3">
+            {features.map((feature) => {
+              const Icon = feature.icon;
+
+              return (
+                <article
+                  key={feature.title}
+                  className="rounded-3xl border border-[#e4b957]/15 bg-[linear-gradient(145deg,_rgba(28,34,67,0.84),_rgba(45,37,82,0.76))] p-6 shadow-xl shadow-black/20 backdrop-blur"
+                >
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl border border-[#e4b957]/20 bg-[#e4b957]/10 text-[#e4b957]">
+                    <Icon size={23} strokeWidth={1.8} />
+                  </div>
+
+                  <h2 className="mt-5 font-serif text-xl font-semibold text-white">
+                    {feature.title}
+                  </h2>
+
+                  <p className="mt-3 leading-7 text-slate-400">
+                    {feature.text}
+                  </p>
+                </article>
+              );
+            })}
+          </section>
         </div>
       </section>
-
-      <section id="deine-zeit" className="mx-auto max-w-6xl px-6 py-20">
-        <div className="rounded-3xl border border-slate-700 bg-gradient-to-r from-[#17203c] to-[#152d37] p-8 sm:p-12">
-          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-teal-300">
-            Deine Zeitkapsel
-          </p>
-
-          <h2 className="mt-3 max-w-2xl text-3xl font-bold">
-            Ein kleiner Moment heute kann später viel bedeuten.
-          </h2>
-
-          <p className="mt-4 max-w-xl text-slate-300">
-            Halte besondere Gedanken und Erinnerungen für einen späteren Moment
-            fest.
-          </p>
-
-          <Link
-            href="/login"
-            className="mt-8 inline-block rounded-xl bg-teal-300 px-6 py-3 font-semibold text-slate-950 transition hover:bg-teal-200"
-          >
-            Erste Kapsel vorbereiten
-          </Link>
-        </div>
-      </section>
-
-      <footer className="border-t border-slate-800 px-6 py-7 text-center text-sm text-slate-500">
-        Zeitkapsel · Abschlussprojekt
-      </footer>
     </main>
   );
 }

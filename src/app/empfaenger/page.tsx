@@ -1,3 +1,4 @@
+import { UserRound } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
 
 const empfaenger = [
@@ -29,45 +30,42 @@ const empfaenger = [
 
 export default function EmpfaengerPage() {
   return (
-    <main className="min-h-screen bg-[#070b1a] text-slate-100">
-      <div className="flex">
-        <AppSidebar />
+    <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
+      <AppSidebar />
 
-        <section className="min-h-screen flex-1 bg-[radial-gradient(circle_at_top_left,_rgba(91,57,148,0.35),_transparent_35%),radial-gradient(circle_at_top_right,_rgba(20,82,120,0.35),_transparent_35%)] px-8 py-10 lg:px-16">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[#e4b957]">
+      <section className="min-h-screen min-w-0 flex-1 bg-[linear-gradient(135deg,_rgba(38,29,78,0.95)_0%,_rgba(10,18,38,0.98)_45%,_rgba(9,31,55,0.95)_100%)] px-6 py-10 lg:px-12">
+        <div className="mx-auto max-w-6xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e4b957]">
             Empfänger
           </p>
 
-          <h1 className="mt-4 font-serif text-5xl font-semibold text-white">
+          <h1 className="mt-4 font-serif text-4xl font-semibold tracking-tight text-white sm:text-5xl">
             Vertrauenskreis
           </h1>
 
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-300">
+          <p className="mt-3 max-w-3xl text-lg leading-8 text-slate-300">
             Hier verwalte ich, für wen meine Zeitkapseln gedacht sind. Eine
-            Kapsel kann nur für mich selbst bestimmt sein oder einer bestimmten
+            Kapsel kann für mich selbst bestimmt sein oder einer bestimmten
             Person zugeordnet werden.
           </p>
 
-          <div className="mt-12 grid gap-6 xl:grid-cols-2">
+          <section className="mt-12 grid gap-6 xl:grid-cols-2">
             {empfaenger.map((person) => (
               <article
                 key={person.name}
-                className="rounded-3xl border border-violet-200/15 bg-[#171b35]/85 p-7 shadow-2xl shadow-black/25"
+                className="rounded-3xl border border-[#e4b957]/15 bg-[linear-gradient(145deg,_rgba(28,34,67,0.94),_rgba(45,37,82,0.88))] p-7 shadow-2xl shadow-black/30 backdrop-blur"
               >
                 <div className="flex items-start justify-between gap-5">
                   <div className="flex items-center gap-4">
-                    <div className="grid h-14 w-14 place-items-center rounded-full bg-violet-400/25 font-semibold text-violet-100">
-                      {person.name
-                        .split(" ")
-                        .map((part) => part[0])
-                        .join("")
-                        .slice(0, 2)}
+                    <div className="grid h-14 w-14 place-items-center rounded-2xl border border-[#e4b957]/20 bg-[#e4b957]/10 text-[#e4b957]">
+                      <UserRound size={25} strokeWidth={1.8} />
                     </div>
 
                     <div>
                       <h2 className="font-serif text-2xl font-semibold text-white">
                         {person.name}
                       </h2>
+
                       <p className="text-slate-400">{person.relation}</p>
                     </div>
                   </div>
@@ -77,8 +75,8 @@ export default function EmpfaengerPage() {
                   </span>
                 </div>
 
-                <div className="mt-7 border-t border-white/10 pt-5">
-                  <p className="text-sm font-medium uppercase tracking-[0.18em] text-slate-500">
+                <div className="mt-7 border-t border-[#e4b957]/10 pt-5">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
                     Zugeordnete Kapseln
                   </p>
 
@@ -86,18 +84,18 @@ export default function EmpfaengerPage() {
                     {person.items.map((item) => (
                       <div
                         key={item}
-                        className="flex items-center justify-between rounded-2xl bg-slate-950/25 px-4 py-3 text-slate-300"
+                        className="rounded-2xl border border-white/5 bg-slate-950/25 px-4 py-3 text-slate-300"
                       >
-                        <span>{item}</span>
+                        {item}
                       </div>
                     ))}
                   </div>
                 </div>
               </article>
             ))}
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
+      </section>
     </main>
   );
 }
