@@ -24,7 +24,7 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden min-h-screen w-72 shrink-0 flex-col border-r border-[#d8aa5b]/15 bg-[radial-gradient(circle_at_20%_10%,_rgba(216,170,91,0.18),_transparent_22%),radial-gradient(circle_at_80%_35%,_rgba(124,92,255,0.16),_transparent_28%),linear-gradient(180deg,_#141024_0%,_#0b1020_48%,_#070b1a_100%)] px-6 py-8 shadow-2xl shadow-black/30 lg:flex">
+    <aside className="sticky top-0 hidden h-screen w-72 shrink-0 flex-col overflow-y-auto border-r border-[#d8aa5b]/15 bg-[radial-gradient(circle_at_20%_10%,_rgba(216,170,91,0.18),_transparent_22%),radial-gradient(circle_at_80%_35%,_rgba(124,92,255,0.16),_transparent_28%),linear-gradient(180deg,_#141024_0%,_#0b1020_48%,_#070b1a_100%)] px-6 py-8 shadow-2xl shadow-black/30 lg:flex">
       <Link href="/dashboard" className="flex items-center gap-3">
         <div className="rounded-2xl border border-[#d8aa5b]/40 bg-[linear-gradient(145deg,_#5b3426,_#2b1814)] p-1 shadow-lg shadow-black/30">
           <div className="grid h-12 w-12 place-items-center rounded-xl border border-[#f0d08a]/35 bg-[radial-gradient(circle_at_35%_25%,_rgba(240,208,138,0.35),_rgba(91,52,38,0.25)_38%,_rgba(18,12,10,0.8)_100%)] text-[#f0d08a]">
@@ -77,27 +77,31 @@ export function AppSidebar() {
         </p>
       </section>
 
-      <div className="mt-auto">
+      <div className="mt-auto pt-8">
         <Link
           href="/einstellungen"
-          className="flex items-center gap-3 rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border border-transparent px-4 py-3 text-slate-400 transition hover:border-[#d8aa5b]/15 hover:bg-slate-950/25 hover:text-[#f0d08a]"
+          aria-label="Konto und Einstellungen öffnen"
+          className={`flex items-center gap-3 rounded-[0_2rem_2rem_2rem] border p-4 shadow-lg shadow-black/25 transition ${
+            pathname === "/einstellungen"
+              ? "border-[#d8aa5b]/45 bg-[linear-gradient(145deg,_rgba(91,52,38,0.72),_rgba(15,23,42,0.78))]"
+              : "border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(91,52,38,0.5),_rgba(15,23,42,0.75))] hover:border-[#d8aa5b]/40"
+          }`}
         >
-          <Settings size={21} strokeWidth={1.8} />
-          Einstellungen
-        </Link>
-
-        <div className="mt-5 rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(91,52,38,0.5),_rgba(15,23,42,0.75))] p-4 shadow-lg shadow-black/25">
-          <div className="flex items-center gap-3">
-            <div className="grid h-10 w-10 place-items-center rounded-full border border-[#d8aa5b]/25 bg-[#d8aa5b]/10 text-sm font-bold text-[#f0d08a]">
-              DU
-            </div>
-
-            <div>
-              <p className="font-medium text-slate-100">Dein Konto</p>
-              <p className="text-sm text-slate-400">Nicht angemeldet</p>
-            </div>
+          <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#d8aa5b]/25 bg-[#d8aa5b]/10 text-sm font-bold text-[#f0d08a]">
+            DU
           </div>
-        </div>
+
+          <div className="min-w-0 flex-1">
+            <p className="font-medium text-slate-100">Dein Konto</p>
+            <p className="text-sm text-slate-400">Nicht angemeldet</p>
+          </div>
+
+          <Settings
+            className="shrink-0 text-slate-400"
+            size={20}
+            strokeWidth={1.8}
+          />
+        </Link>
       </div>
     </aside>
   );
