@@ -77,9 +77,8 @@ export default function TimelinePage() {
                   </p>
                 </div>
 
-                <div className="relative rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
+                <div className="relative rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
                   <div className="absolute -left-7 top-9 hidden h-3 w-3 rounded-full bg-[#d8aa5b] shadow-lg shadow-[#d8aa5b]/30 lg:block" />
-
                   <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                     <div>
                       <h2 className="font-serif text-2xl font-semibold text-white">

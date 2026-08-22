@@ -34,14 +34,14 @@ export default function NeueKapselPage() {
               </p>
             </div>
 
-            <div className="rounded-2xl border border-[#d8aa5b]/25 bg-[linear-gradient(145deg,_#5b3426,_#2b1814)] p-1 shadow-lg shadow-black/30">
+            <div className="rounded-[1rem_1.7rem_1.7rem_1.7rem] border border-[#d8aa5b]/25 bg-[linear-gradient(145deg,_#5b3426,_#2b1814)] p-1 shadow-lg shadow-black/30">
               <div className="grid h-14 w-14 place-items-center rounded-xl border border-[#f0d08a]/35 bg-[radial-gradient(circle_at_35%_25%,_rgba(240,208,138,0.35),_rgba(91,52,38,0.25)_38%,_rgba(18,12,10,0.8)_100%)] text-[#f0d08a]">
                 <FileText size={27} strokeWidth={1.7} />
               </div>
             </div>
           </div>
 
-          <form className="mt-10 overflow-hidden rounded-3xl border border-[#d8aa5b]/20 bg-[radial-gradient(circle_at_20%_10%,_rgba(240,208,138,0.18),_transparent_25%),linear-gradient(145deg,_rgba(91,52,38,0.42),_rgba(15,23,42,0.78))] p-6 shadow-2xl shadow-black/35 sm:p-8">
+          <form className="relative mt-10 overflow-hidden rounded-[0_2.4rem_2rem_2rem] border border-[#d8aa5b]/20 bg-[radial-gradient(circle_at_20%_10%,_rgba(240,208,138,0.18),_transparent_25%),linear-gradient(145deg,_rgba(91,52,38,0.42),_rgba(15,23,42,0.78))] p-6 shadow-2xl shadow-black/35 sm:p-8">
             <div className="grid gap-6">
               <div>
                 <label
@@ -55,7 +55,7 @@ export default function NeueKapselPage() {
                   id="title"
                   type="text"
                   placeholder="Zum Beispiel: Brief an mein zukünftiges Ich"
-                  className="w-full rounded-2xl border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
+                  className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
                 />
               </div>
 
@@ -71,7 +71,7 @@ export default function NeueKapselPage() {
                   id="message"
                   rows={8}
                   placeholder="Was möchte ich für später festhalten?"
-                  className="w-full resize-none rounded-2xl border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
+                  className="w-full resize-none rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
                 />
               </div>
 
@@ -94,7 +94,7 @@ export default function NeueKapselPage() {
                     <input
                       id="openDate"
                       type="date"
-                      className="w-full rounded-2xl border border-[#d8aa5b]/15 bg-slate-950/40 py-3 pl-12 pr-4 text-slate-100 outline-none focus:border-[#d8aa5b]/60"
+                      className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 py-3 pl-12 pr-4 text-slate-100 outline-none focus:border-[#d8aa5b]/60"
                     />
                   </div>
                 </div>
@@ -110,7 +110,7 @@ export default function NeueKapselPage() {
                   <select
                     id="recipient"
                     defaultValue="self"
-                    className="w-full rounded-2xl border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none focus:border-[#d8aa5b]/60"
+                    className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none focus:border-[#d8aa5b]/60"
                   >
                     <option value="self">Für mich selbst</option>
                     <option value="person">Für eine bestimmte Person</option>
@@ -122,7 +122,7 @@ export default function NeueKapselPage() {
             <div className="mt-8 flex flex-wrap gap-4 border-t border-[#d8aa5b]/10 pt-6">
               <Link
                 href="/kapseln"
-                className="inline-flex items-center gap-2 rounded-2xl bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
+                className="inline-flex items-center gap-2 rounded-[1rem_1.7rem_1.7rem_1.7rem] bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
               >
                 <Save size={18} strokeWidth={2} />
                 Kapsel speichern
@@ -130,7 +130,7 @@ export default function NeueKapselPage() {
 
               <Link
                 href="/kapseln"
-                className="rounded-2xl border border-[#d8aa5b]/20 px-5 py-3 font-semibold text-slate-200 transition hover:border-[#d8aa5b]/50 hover:text-[#f0d08a]"
+                className="rounded-[1rem_1.7rem_1.7rem_1.7rem] border border-[#d8aa5b]/20 px-5 py-3 font-semibold text-slate-200 transition hover:border-[#d8aa5b]/50 hover:text-[#f0d08a]"
               >
                 Abbrechen
               </Link>

@@ -53,10 +53,10 @@ export function AppSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-base transition ${
+              className={`relative flex items-center gap-3 border px-4 py-3 text-base transition ${
                 isActive
-                  ? "border-[#d8aa5b]/25 bg-[#d8aa5b]/12 font-semibold text-white shadow-lg shadow-black/20"
-                  : "border-transparent text-slate-400 hover:border-[#d8aa5b]/15 hover:bg-slate-950/25 hover:text-[#f0d08a]"
+                  ? "rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border-[#d8aa5b]/25 bg-[#d8aa5b]/12 font-semibold text-white shadow-lg shadow-black/20"
+                  : "rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border-transparent text-slate-400 hover:border-[#d8aa5b]/15 hover:bg-slate-950/25 hover:text-[#f0d08a]"
               }`}
             >
               <Icon size={21} strokeWidth={1.8} />
@@ -66,7 +66,7 @@ export function AppSidebar() {
         })}
       </nav>
 
-      <section className="mt-10 rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.42),_rgba(15,23,42,0.55))] p-5 shadow-lg shadow-black/20">
+      <section className="relative mt-10 overflow-hidden rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.42),_rgba(15,23,42,0.55))] p-5 shadow-lg shadow-black/20">
         <h2 className="font-serif text-lg font-semibold text-slate-100">
           Persönlich bewahrt
         </h2>
@@ -80,13 +80,13 @@ export function AppSidebar() {
       <div className="mt-auto">
         <Link
           href="/einstellungen"
-          className="flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 text-slate-400 transition hover:border-[#d8aa5b]/15 hover:bg-slate-950/25 hover:text-[#f0d08a]"
+          className="flex items-center gap-3 rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border border-transparent px-4 py-3 text-slate-400 transition hover:border-[#d8aa5b]/15 hover:bg-slate-950/25 hover:text-[#f0d08a]"
         >
           <Settings size={21} strokeWidth={1.8} />
           Einstellungen
         </Link>
 
-        <div className="mt-5 rounded-3xl border border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(91,52,38,0.5),_rgba(15,23,42,0.75))] p-4 shadow-lg shadow-black/25">
+        <div className="mt-5 rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(91,52,38,0.5),_rgba(15,23,42,0.75))] p-4 shadow-lg shadow-black/25">
           <div className="flex items-center gap-3">
             <div className="grid h-10 w-10 place-items-center rounded-full border border-[#d8aa5b]/25 bg-[#d8aa5b]/10 text-sm font-bold text-[#f0d08a]">
               DU

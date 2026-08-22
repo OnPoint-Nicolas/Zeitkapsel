@@ -34,7 +34,7 @@ export default function DashboardPage() {
 
             <Link
               href="/kapseln/neu"
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
+              className="inline-flex items-center gap-2 rounded-[1rem_1.7rem_1.7rem_1.7rem] bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
             >
               <Plus size={19} strokeWidth={2} />
               Neue Zeitkapsel
@@ -42,21 +42,36 @@ export default function DashboardPage() {
           </div>
 
           <section className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {stats.map(([number, label]) => (
-              <article
-                key={label}
-                className="rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-6 shadow-xl shadow-black/20 backdrop-blur"
-              >
-                <p className="font-serif text-3xl font-semibold text-[#d8aa5b]">
-                  {number}
-                </p>
-                <p className="mt-2 text-sm text-slate-400">{label}</p>
-              </article>
-            ))}
+            {stats.map(([number, label], index) => {
+              const cardLayout = [
+                "rounded-[0_2.5rem_1.25rem_2.5rem]",
+                "rounded-[0_2.5rem_1.25rem_2.5rem]",
+                "rounded-[0_2.5rem_1.25rem_2.5rem]",
+                "rounded-[0_2.5rem_1.25rem_2.5rem]",
+              ][index];
+
+              return (
+                <article
+                  key={label}
+                  className={`relative min-h-36 overflow-hidden border border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(98,57,37,0.55),_rgba(15,23,42,0.82))] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.28)] backdrop-blur ${cardLayout}`}
+                >
+                  <div className="absolute bottom-0 left-0 h-px w-2/3 bg-gradient-to-r from-[#d8aa5b]/60 to-transparent" />
+
+                  <p className="font-serif text-3xl font-semibold text-[#e5bd72]">
+                    {number}
+                  </p>
+
+                  <p className="mt-3 text-sm tracking-wide text-slate-300">
+                    {label}
+                  </p>
+                </article>
+              );
+            })}
           </section>
 
           <section className="mt-10 grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
-            <article className="rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
+            <article className="relative overflow-hidden rounded-[0_2.4rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
+              <div className="absolute left-0 top-0 h-24 w-24 bg-[radial-gradient(circle_at_top_left,_rgba(240,208,138,0.15),_transparent_70%)]" />
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
@@ -79,14 +94,14 @@ export default function DashboardPage() {
 
               <Link
                 href="/kapseln/neu"
-                className="mt-7 inline-flex items-center gap-2 rounded-2xl border border-[#d8aa5b]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#d8aa5b] hover:text-[#d8aa5b]"
+                className="mt-7 inline-flex items-center gap-2 rounded-[1rem_1.6rem_1.6rem_1.6rem] border border-[#d8aa5b]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#d8aa5b] hover:text-[#d8aa5b]"
               >
                 <Plus size={18} strokeWidth={2} />
                 Erste Kapsel erstellen
               </Link>
             </article>
 
-            <article className="rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
+            <article className="relative overflow-hidden rounded-[0_2.4rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="flex items-center gap-3">
                 <span className="grid h-11 w-11 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
                   <Vault size={22} strokeWidth={1.8} />
@@ -140,7 +155,7 @@ export default function DashboardPage() {
               </Link>
             </div>
 
-            <div className="mt-5 rounded-3xl border border-dashed border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(15,23,42,0.58),_rgba(39,34,73,0.48))] p-10 text-center shadow-xl shadow-black/20 backdrop-blur">
+            <div className="mt-5 rounded-[0_2.4rem_2rem_2rem] border border-dashed border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(15,23,42,0.58),_rgba(39,34,73,0.48))] p-10 text-center shadow-xl shadow-black/20 backdrop-blur">
               <p className="font-serif text-xl font-semibold text-white">
                 Meine Sammlung ist noch leer.
               </p>

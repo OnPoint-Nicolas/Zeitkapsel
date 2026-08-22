@@ -51,14 +51,14 @@ export default function HomePage() {
             <nav className="flex items-center gap-3">
               <Link
                 href="/login"
-                className="rounded-2xl border border-[#d8aa5b]/20 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-[#d8aa5b]/50 hover:text-[#f0d08a]"
+                className="rounded-[1rem_1.5rem_1.5rem_1.5rem] border border-[#d8aa5b]/20 px-4 py-2 text-sm font-semibold text-slate-200 transition hover:border-[#d8aa5b]/50 hover:text-[#f0d08a]"
               >
                 Anmelden
               </Link>
 
               <Link
                 href="/dashboard"
-                className="rounded-2xl bg-[#d8aa5b] px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-[#f0d08a]"
+                className="rounded-[1rem_1.5rem_1.5rem_1.5rem] bg-[#d8aa5b] px-4 py-2 text-sm font-semibold text-slate-950 transition hover:bg-[#f0d08a]"
               >
                 Zur App
               </Link>
@@ -84,7 +84,7 @@ export default function HomePage() {
               <div className="mt-9 flex flex-wrap gap-4">
                 <Link
                   href="/kapseln/neu"
-                  className="inline-flex items-center gap-2 rounded-2xl bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
+                  className="inline-flex items-center gap-2 rounded-[1rem_1.7rem_1.7rem_1.7rem] bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
                 >
                   Zeitkapsel erstellen
                   <ArrowRight size={18} strokeWidth={2} />
@@ -92,16 +92,15 @@ export default function HomePage() {
 
                 <Link
                   href="/dashboard"
-                  className="inline-flex items-center gap-2 rounded-2xl border border-[#d8aa5b]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#d8aa5b] hover:text-[#f0d08a]"
+                  className="inline-flex items-center gap-2 rounded-[1rem_1.7rem_1.7rem_1.7rem] border border-[#d8aa5b]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#d8aa5b] hover:text-[#f0d08a]"
                 >
                   Dashboard ansehen
                 </Link>
               </div>
             </section>
 
-            <section className="relative overflow-hidden rounded-3xl border border-[#d8aa5b]/25 bg-[radial-gradient(circle_at_25%_20%,_rgba(240,208,138,0.34),_transparent_28%),linear-gradient(145deg,_#6b3f2d,_#2b1814)] p-7 shadow-2xl shadow-black/35">
+            <section className="relative overflow-hidden rounded-[0_2.4rem_2rem_2rem] border border-[#d8aa5b]/25 bg-[radial-gradient(circle_at_25%_20%,_rgba(240,208,138,0.34),_transparent_28%),linear-gradient(145deg,_#6b3f2d,_#2b1814)] p-7 shadow-2xl shadow-black/35">
               <div className="pointer-events-none absolute inset-0 bg-[repeating-radial-gradient(circle_at_35%_20%,_rgba(255,255,255,0.14)_0,_rgba(255,255,255,0.14)_1px,_transparent_2px,_transparent_10px)] opacity-25" />
-
               <div className="relative">
                 <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#f0d08a]">
                   Beispiel-Kapsel
@@ -117,14 +116,14 @@ export default function HomePage() {
                 </p>
 
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-black/20 bg-black/20 p-4">
+                  <div className="rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border border-black/20 bg-black/20 p-4">
                     <p className="text-sm text-slate-400">Status</p>
                     <p className="mt-2 font-semibold text-[#f0d08a]">
                       versiegelt
                     </p>
                   </div>
 
-                  <div className="rounded-2xl border border-black/20 bg-black/20 p-4">
+                  <div className="rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border border-black/20 bg-black/20 p-4">
                     <p className="text-sm text-slate-400">Öffnet am</p>
                     <p className="mt-2 font-semibold text-slate-100">
                       15. Januar 2030
@@ -142,7 +141,7 @@ export default function HomePage() {
               return (
                 <article
                   key={feature.title}
-                  className="rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-6 shadow-xl shadow-black/25"
+                  className="relative rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-6 shadow-xl shadow-black/25"
                 >
                   <div className="grid h-12 w-12 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#f0d08a]">
                     <Icon size={23} strokeWidth={1.8} />

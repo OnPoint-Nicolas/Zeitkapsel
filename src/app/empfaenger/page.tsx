@@ -53,7 +53,7 @@ export default function EmpfaengerPage() {
             {empfaenger.map((person) => (
               <article
                 key={person.name}
-                className="rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur"
+                className="relative rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur"
               >
                 <div className="flex items-start justify-between gap-5">
                   <div className="flex items-center gap-4">
@@ -84,7 +84,7 @@ export default function EmpfaengerPage() {
                     {person.items.map((item) => (
                       <div
                         key={item}
-                        className="rounded-2xl border border-white/5 bg-slate-950/25 px-4 py-3 text-slate-300"
+                      className="rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-white/5 bg-slate-950/25 px-4 py-3 text-slate-300"
                       >
                         {item}
                       </div>

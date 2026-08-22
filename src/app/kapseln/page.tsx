@@ -75,14 +75,14 @@ export default function KapselnPage() {
 
             <Link
               href="/kapseln/neu"
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
+              className="inline-flex items-center gap-2 rounded-[1rem_1.7rem_1.7rem_1.7rem] bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
             >
               <Plus size={19} strokeWidth={2} />
               Neue Zeitkapsel
             </Link>
           </div>
 
-          <section className="mt-10 rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-5 shadow-xl shadow-black/25">
+          <section className="relative mt-10 overflow-hidden rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-5 shadow-xl shadow-black/25">
             <div className="relative">
               <Search
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"
@@ -93,7 +93,7 @@ export default function KapselnPage() {
               <input
                 type="search"
                 placeholder="Kapseln durchsuchen"
-                className="w-full rounded-2xl border border-[#d8aa5b]/15 bg-slate-950/40 py-3 pl-12 pr-4 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
+                className="w-full rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border border-[#d8aa5b]/15 bg-slate-950/40 py-3 pl-12 pr-4 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
               />
             </div>
 
@@ -102,7 +102,7 @@ export default function KapselnPage() {
                 (filter) => (
                   <button
                     key={filter}
-                    className="rounded-full border border-[#d8aa5b]/20 bg-slate-950/20 px-4 py-2 text-sm text-slate-300 transition hover:border-[#d8aa5b]/50 hover:text-[#f0d08a]"
+                    className="rounded-[999px] border border-[#d8aa5b]/20 bg-slate-950/20 px-4 py-2 text-sm text-slate-300 transition hover:border-[#d8aa5b]/50 hover:text-[#f0d08a]"
                     type="button"
                   >
                     {filter}
@@ -120,10 +120,9 @@ export default function KapselnPage() {
                 <Link
                   key={kapsel.id}
                   href={`/kapseln/${kapsel.id}`}
-                  className={`group relative overflow-hidden rounded-3xl border p-7 shadow-2xl shadow-black/35 transition hover:-translate-y-1 ${kapsel.material}`}
+                  className={`group relative overflow-hidden rounded-[0_2rem_2rem_2rem] border p-7 shadow-2xl shadow-black/35 transition hover:-translate-y-1 ${kapsel.material}`}
                 >
                   <div className="pointer-events-none absolute inset-0 bg-[repeating-radial-gradient(circle_at_35%_20%,_rgba(255,255,255,0.14)_0,_rgba(255,255,255,0.14)_1px,_transparent_2px,_transparent_10px)] opacity-25" />
-
                   <div className="relative flex items-start justify-between gap-4">
                     <span className="grid h-12 w-12 place-items-center rounded-2xl border border-black/20 bg-black/20 text-[#f0d08a] shadow-lg shadow-black/25">
                       <FileText size={22} strokeWidth={1.8} />

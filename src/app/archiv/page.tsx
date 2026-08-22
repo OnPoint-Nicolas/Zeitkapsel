@@ -39,7 +39,7 @@ export default function ArchivPage() {
               <Link
                 key={kapsel.id}
                 href={`/kapseln/${kapsel.id}`}
-                className="group rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur transition hover:-translate-y-1 hover:border-[#d8aa5b]/35"
+                className="group relative rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur transition hover:-translate-y-1 hover:border-[#d8aa5b]/35"
               >
                 <div className="flex items-start justify-between gap-5">
                   <span className="grid h-14 w-14 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">

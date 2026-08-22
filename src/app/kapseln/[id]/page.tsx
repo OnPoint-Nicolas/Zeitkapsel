@@ -93,10 +93,9 @@ export default async function KapselDetailPage({
           </Link>
 
           <article
-            className={`relative mt-10 overflow-hidden rounded-3xl border p-7 shadow-2xl shadow-black/35 sm:p-10 ${kapsel.material}`}
+            className={`relative mt-10 overflow-hidden rounded-[0_2.2rem_2rem_2rem] border p-7 shadow-2xl shadow-black/35 sm:p-10 ${kapsel.material}`}
           >
             <div className="pointer-events-none absolute inset-0 bg-[repeating-radial-gradient(circle_at_35%_20%,_rgba(255,255,255,0.14)_0,_rgba(255,255,255,0.14)_1px,_transparent_2px,_transparent_10px)] opacity-25" />
-
             <div className="relative flex flex-wrap items-start justify-between gap-5">
               <div className="grid h-16 w-16 place-items-center rounded-2xl border border-black/20 bg-black/20 text-[#f0d08a] shadow-lg shadow-black/25">
                 <KindIcon size={30} strokeWidth={1.7} />
@@ -186,7 +185,7 @@ export default async function KapselDetailPage({
                   Persönliche Nachricht
                 </p>
 
-                <div className="relative mt-4 overflow-hidden rounded-3xl border border-black/20 bg-black/20 p-6">
+                <div className="relative mt-4 overflow-hidden rounded-[0_1.8rem_1.8rem_1.8rem] border border-black/20 bg-black/20 p-6">
                   <p
                     className={`whitespace-pre-line text-lg leading-8 ${
                       isLight ? "text-slate-900" : "text-slate-200"
