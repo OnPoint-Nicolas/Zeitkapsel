@@ -14,9 +14,9 @@ export default function DashboardPage() {
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />
 
-      <section className="min-h-screen min-w-0 flex-1 bg-[linear-gradient(135deg,_rgba(38,29,78,0.95)_0%,_rgba(10,18,38,0.98)_45%,_rgba(9,31,55,0.95)_100%)] px-6 py-10 lg:px-12">
+      <section className="min-h-screen min-w-0 flex-1 bg-[radial-gradient(circle_at_12%_10%,_rgba(216,170,91,0.16),_transparent_22%),radial-gradient(circle_at_88%_18%,_rgba(48,112,166,0.22),_transparent_30%),linear-gradient(135deg,_#141024_0%,_#081324_48%,_#050814_100%)] px-6 py-10 lg:px-12">
         <div className="mx-auto max-w-6xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e4b957]">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
             Übersicht
           </p>
 
@@ -34,7 +34,7 @@ export default function DashboardPage() {
 
             <Link
               href="/kapseln/neu"
-              className="inline-flex items-center gap-2 rounded-2xl bg-[#e4b957] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#e4b957]/10 transition hover:bg-[#f0ca70]"
+              className="inline-flex items-center gap-2 rounded-2xl bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
             >
               <Plus size={19} strokeWidth={2} />
               Neue Zeitkapsel
@@ -45,9 +45,9 @@ export default function DashboardPage() {
             {stats.map(([number, label]) => (
               <article
                 key={label}
-                className="rounded-3xl border border-[#e4b957]/15 bg-[linear-gradient(145deg,_rgba(28,34,67,0.92),_rgba(47,38,83,0.86))] p-6 shadow-xl shadow-black/20 backdrop-blur"
+                className="rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-6 shadow-xl shadow-black/20 backdrop-blur"
               >
-                <p className="font-serif text-3xl font-semibold text-[#e4b957]">
+                <p className="font-serif text-3xl font-semibold text-[#d8aa5b]">
                   {number}
                 </p>
                 <p className="mt-2 text-sm text-slate-400">{label}</p>
@@ -56,10 +56,10 @@ export default function DashboardPage() {
           </section>
 
           <section className="mt-10 grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
-            <article className="rounded-3xl border border-[#e4b957]/15 bg-[linear-gradient(145deg,_rgba(28,34,67,0.94),_rgba(45,37,82,0.88))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
+            <article className="rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e4b957]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
                     Nächster Moment
                   </p>
                   <h2 className="mt-3 font-serif text-2xl font-semibold text-white">
@@ -67,7 +67,7 @@ export default function DashboardPage() {
                   </h2>
                 </div>
 
-                <span className="grid h-12 w-12 place-items-center rounded-2xl border border-[#e4b957]/20 bg-[#e4b957]/10 text-[#e4b957]">
+                <span className="grid h-12 w-12 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
                   <Clock3 size={23} strokeWidth={1.8} />
                 </span>
               </div>
@@ -79,21 +79,21 @@ export default function DashboardPage() {
 
               <Link
                 href="/kapseln/neu"
-                className="mt-7 inline-flex items-center gap-2 rounded-2xl border border-[#e4b957]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#e4b957] hover:text-[#e4b957]"
+                className="mt-7 inline-flex items-center gap-2 rounded-2xl border border-[#d8aa5b]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#d8aa5b] hover:text-[#d8aa5b]"
               >
                 <Plus size={18} strokeWidth={2} />
                 Erste Kapsel erstellen
               </Link>
             </article>
 
-            <article className="rounded-3xl border border-[#e4b957]/15 bg-[linear-gradient(145deg,_rgba(25,31,61,0.94),_rgba(42,36,76,0.88))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
+            <article className="rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-2xl border border-[#e4b957]/20 bg-[#e4b957]/10 text-[#e4b957]">
+                <span className="grid h-11 w-11 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
                   <Vault size={22} strokeWidth={1.8} />
                 </span>
 
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e4b957]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
                     Status
                   </p>
                   <h2 className="font-serif text-2xl font-semibold text-white">
@@ -102,7 +102,7 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              <div className="mt-6 space-y-4 border-t border-[#e4b957]/10 pt-5 text-sm">
+              <div className="mt-6 space-y-4 border-t border-[#d8aa5b]/10 pt-5 text-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Versiegelt</span>
                   <span className="font-semibold text-slate-100">0</span>
@@ -110,7 +110,7 @@ export default function DashboardPage() {
 
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Bald geöffnet</span>
-                  <span className="font-semibold text-[#e4b957]">0</span>
+                  <span className="font-semibold text-[#d8aa5b]">0</span>
                 </div>
 
                 <div className="flex items-center justify-between">
@@ -124,7 +124,7 @@ export default function DashboardPage() {
           <section className="mt-10">
             <div className="flex items-end justify-between gap-4">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#e4b957]">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
                   Zuletzt erstellt
                 </p>
                 <h2 className="mt-3 font-serif text-2xl font-semibold text-white">
@@ -134,13 +134,13 @@ export default function DashboardPage() {
 
               <Link
                 href="/kapseln"
-                className="text-sm font-semibold text-[#e4b957] transition hover:text-[#f0ca70]"
+                className="text-sm font-semibold text-[#d8aa5b] transition hover:text-[#f0d08a]"
               >
                 Alle ansehen
               </Link>
             </div>
 
-            <div className="mt-5 rounded-3xl border border-dashed border-[#e4b957]/20 bg-[linear-gradient(145deg,_rgba(15,23,42,0.58),_rgba(39,34,73,0.48))] p-10 text-center shadow-xl shadow-black/20 backdrop-blur">
+            <div className="mt-5 rounded-3xl border border-dashed border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(15,23,42,0.58),_rgba(39,34,73,0.48))] p-10 text-center shadow-xl shadow-black/20 backdrop-blur">
               <p className="font-serif text-xl font-semibold text-white">
                 Meine Sammlung ist noch leer.
               </p>

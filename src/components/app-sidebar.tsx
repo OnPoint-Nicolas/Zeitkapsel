@@ -8,6 +8,7 @@ import {
   Compass,
   Hourglass,
   Settings,
+  TimerReset,
   Users,
 } from "lucide-react";
 
@@ -23,18 +24,20 @@ export function AppSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="hidden min-h-screen w-72 shrink-0 flex-col border-r border-violet-200/10 bg-[#13142d] px-6 py-8 lg:flex">
+    <aside className="hidden min-h-screen w-72 shrink-0 flex-col border-r border-[#d8aa5b]/15 bg-[radial-gradient(circle_at_20%_10%,_rgba(216,170,91,0.18),_transparent_22%),radial-gradient(circle_at_80%_35%,_rgba(124,92,255,0.16),_transparent_28%),linear-gradient(180deg,_#141024_0%,_#0b1020_48%,_#070b1a_100%)] px-6 py-8 shadow-2xl shadow-black/30 lg:flex">
       <Link href="/dashboard" className="flex items-center gap-3">
-        <div className="grid h-12 w-12 place-items-center rounded-2xl border border-violet-300/30 bg-violet-400/15 text-xl text-[#e4b957]">
-          ✦
+        <div className="rounded-2xl border border-[#d8aa5b]/40 bg-[linear-gradient(145deg,_#5b3426,_#2b1814)] p-1 shadow-lg shadow-black/30">
+          <div className="grid h-12 w-12 place-items-center rounded-xl border border-[#f0d08a]/35 bg-[radial-gradient(circle_at_35%_25%,_rgba(240,208,138,0.35),_rgba(91,52,38,0.25)_38%,_rgba(18,12,10,0.8)_100%)] text-[#f0d08a]">
+            <TimerReset size={25} strokeWidth={1.7} />
+          </div>
         </div>
 
         <div>
           <p className="font-serif text-2xl font-semibold text-slate-100">
-            Zeitkapsel
+            Aevum
           </p>
-          <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-400">
-            Persönliche Erinnerungen
+          <p className="text-xs font-medium uppercase tracking-[0.22em] text-[#d8aa5b]">
+            Zeitkapsel
           </p>
         </div>
       </Link>
@@ -44,17 +47,16 @@ export function AppSidebar() {
           const Icon = item.icon;
           const isActive =
             pathname === item.href ||
-            (item.href === "/kapseln" &&
-              pathname.startsWith("/kapseln/"));
+            (item.href === "/kapseln" && pathname.startsWith("/kapseln/"));
 
           return (
             <Link
               key={item.href}
               href={item.href}
-              className={`flex items-center gap-3 rounded-2xl px-4 py-3 text-base transition ${
+              className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-base transition ${
                 isActive
-                  ? "bg-violet-400/20 font-semibold text-white"
-                  : "text-slate-400 hover:bg-slate-800/70 hover:text-white"
+                  ? "border-[#d8aa5b]/25 bg-[#d8aa5b]/12 font-semibold text-white shadow-lg shadow-black/20"
+                  : "border-transparent text-slate-400 hover:border-[#d8aa5b]/15 hover:bg-slate-950/25 hover:text-[#f0d08a]"
               }`}
             >
               <Icon size={21} strokeWidth={1.8} />
@@ -64,34 +66,36 @@ export function AppSidebar() {
         })}
       </nav>
 
-      <section className="mt-10 rounded-3xl border border-violet-200/15 bg-slate-950/25 p-5">
+      <section className="mt-10 rounded-3xl border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.42),_rgba(15,23,42,0.55))] p-5 shadow-lg shadow-black/20">
         <h2 className="font-serif text-lg font-semibold text-slate-100">
-          Sicher verwahrt
+          Persönlich bewahrt
         </h2>
 
         <p className="mt-2 text-sm leading-6 text-slate-400">
-          Deine Kapseln bleiben privat und werden erst an deinem gewählten
-          Öffnungsdatum sichtbar.
+          Jede Kapsel bekommt ein Öffnungsdatum und bleibt bis dahin Teil meiner
+          privaten Sammlung.
         </p>
       </section>
 
       <div className="mt-auto">
         <Link
           href="/einstellungen"
-          className="flex items-center gap-3 rounded-2xl px-4 py-3 text-slate-400 transition hover:bg-slate-800/70 hover:text-white"
+          className="flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 text-slate-400 transition hover:border-[#d8aa5b]/15 hover:bg-slate-950/25 hover:text-[#f0d08a]"
         >
           <Settings size={21} strokeWidth={1.8} />
           Einstellungen
         </Link>
 
-        <div className="mt-5 flex items-center gap-3 rounded-3xl border border-violet-200/15 bg-slate-950/25 p-4">
-          <div className="grid h-10 w-10 place-items-center rounded-full bg-violet-400/25 text-sm font-bold text-violet-100">
-            DU
-          </div>
+        <div className="mt-5 rounded-3xl border border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(91,52,38,0.5),_rgba(15,23,42,0.75))] p-4 shadow-lg shadow-black/25">
+          <div className="flex items-center gap-3">
+            <div className="grid h-10 w-10 place-items-center rounded-full border border-[#d8aa5b]/25 bg-[#d8aa5b]/10 text-sm font-bold text-[#f0d08a]">
+              DU
+            </div>
 
-          <div>
-            <p className="font-medium text-slate-100">Dein Konto</p>
-            <p className="text-sm text-slate-400">Noch nicht angemeldet</p>
+            <div>
+              <p className="font-medium text-slate-100">Dein Konto</p>
+              <p className="text-sm text-slate-400">Nicht angemeldet</p>
+            </div>
           </div>
         </div>
       </div>
