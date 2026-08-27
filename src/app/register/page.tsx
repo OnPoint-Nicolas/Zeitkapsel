@@ -1,5 +1,8 @@
 import Link from "next/link";
 import { ArrowLeft, UserPlus, TimerReset } from "lucide-react";
+import { registerUser } from "./actions";
+
+
 
 export default function RegisterPage() {
   return (
@@ -34,7 +37,7 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        <form className="mt-8 grid gap-4">
+        <form action={registerUser} className="mt-8 grid gap-4">
           <div>
             <label
               htmlFor="name"

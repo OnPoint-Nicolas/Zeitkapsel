@@ -74,6 +74,15 @@ export default function LoginPage() {
           </Link>
         </form>
 
+        <p className="mt-6 text-sm text-slate-400">
+          Noch kein Konto?{" "}
+          <Link
+            href="/register"
+            className="font-semibold text-[#f0d08a] transition hover:text-white"
+          >
+            Jetzt registrieren
+          </Link>
+        </p>
         <Link
           href="/"
           className="mt-6 inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-[#f0d08a]"
