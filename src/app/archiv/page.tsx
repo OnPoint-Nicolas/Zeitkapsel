@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Archive, CalendarDays } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { requireUser } from "@/lib/session";
 
 const archivKapseln = [
   {
@@ -13,7 +14,8 @@ const archivKapseln = [
   },
 ];
 
-export default function ArchivPage() {
+export default async function ArchivPage() {
+  await requireUser();
   return (
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />

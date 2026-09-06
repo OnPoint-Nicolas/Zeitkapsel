@@ -1,5 +1,6 @@
 import { UserRound } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { requireUser } from "@/lib/session";
 
 const empfaenger = [
   {
@@ -28,7 +29,8 @@ const empfaenger = [
   },
 ];
 
-export default function EmpfaengerPage() {
+export default async function EmpfaengerPage() {
+  await requireUser();
   return (
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />

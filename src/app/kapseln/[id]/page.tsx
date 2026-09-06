@@ -11,6 +11,7 @@ import {
   Users,
 } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { requireUser } from "@/lib/session";
 
 const kapseln = {
   "brief-an-mich": {
@@ -65,8 +66,10 @@ function getStatusClasses(status: string) {
 export default async function KapselDetailPage({
   params,
 }: {
+  
   params: Promise<{ id: string }>;
 }) {
+  await requireUser();
   const { id } = await params;
   const kapsel = kapseln[id as CapsuleId];
 

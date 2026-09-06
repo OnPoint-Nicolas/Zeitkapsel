@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Clock3, Plus, Vault } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
-
+import { requireUser } from "@/lib/session";
 const stats = [
   ["0", "Zeitkapseln"],
   ["0", "Versiegelt"],
@@ -9,7 +9,10 @@ const stats = [
   ["–", "Nächste Öffnung"],
 ];
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+
+  await requireUser();
+
   return (
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />

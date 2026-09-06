@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CalendarDays, FileText, Plus, Search, ShieldCheck } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { requireUser } from "@/lib/session";
 
 const kapseln = [
   {
@@ -50,7 +51,8 @@ function getStatusClasses(status: string) {
   return "border-[#d8aa5b]/40 bg-black/25 text-[#f0d08a]";
 }
 
-export default function KapselnPage() {
+export default async function KapselnPage() {
+  await requireUser();
   return (
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />

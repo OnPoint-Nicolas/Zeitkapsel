@@ -1,5 +1,6 @@
 import { CalendarDays } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { requireUser } from "@/lib/session";
 
 const timelineItems = [
   {
@@ -44,7 +45,8 @@ function getStatusClasses(status: string) {
   return "border-slate-500/35 bg-slate-400/10 text-slate-300";
 }
 
-export default function TimelinePage() {
+export default async function TimelinePage() {
+  await requireUser(); 
   return (
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />

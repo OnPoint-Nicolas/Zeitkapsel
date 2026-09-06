@@ -4,6 +4,7 @@ import {
     hashSessionToken,
 } from "./auth";
 import { prisma } from "./prisma";
+import { redirect } from "next/navigation";
 
 const SESSION_COOKIE_NAME = "session";
 
@@ -28,4 +29,37 @@ export async function createSession(userId: string) {
         expires: expiresAt,
         path: "/",
     });
+}
+
+export async function getCurrentUser() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
+
+    if (!token) {
+        return null;
+    }
+
+    const tokenHash = hashSessionToken(token);
+
+    const session = await prisma.session.findUnique({
+        where: { tokenHash },
+        include: { user: true },
+    });
+
+    if (!session || session.expiresAt < new Date()) {
+        return null;
+    }
+
+    return session.user;
+}
+
+export async function requireUser() {
+
+    const user = await getCurrentUser();
+
+    if (!user) {
+        redirect("/login");
+    }
+
+    return user;
 }
