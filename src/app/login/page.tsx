@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowLeft, LockKeyhole, TimerReset } from "lucide-react";
+import { loginUser } from "./actions";
 
 export default function LoginPage() {
   return (
@@ -34,7 +35,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <form className="mt-8 grid gap-4">
+        <form action={loginUser} className="mt-8 grid gap-4">
           <div>
             <label
               htmlFor="email"
@@ -44,8 +45,9 @@ export default function LoginPage() {
             </label>
             <input
               id="email"
+              name="email"
               type="email"
-              placeholder="du@beispiel.de"
+              placeholder="E-Mail-Adresse eingeben"
               className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
             />
           </div>
@@ -59,19 +61,20 @@ export default function LoginPage() {
             </label>
             <input
               id="password"
+              name="password"
               type="password"
               placeholder="Passwort eingeben"
               className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
             />
           </div>
 
-          <Link
-            href="/dashboard"
+          <button
+            type="submit"
             className="mt-3 inline-flex items-center justify-center gap-2 rounded-[1rem_1.6rem_1.6rem_1.6rem] bg-[#d8aa5b] px-4 py-3 text-center font-semibold text-slate-950 transition hover:bg-[#f0d08a]"
           >
             <LockKeyhole size={18} strokeWidth={2} />
             Anmelden
-          </Link>
+          </button>
         </form>
 
         <p className="mt-6 text-sm text-slate-400">
