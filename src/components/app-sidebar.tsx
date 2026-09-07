@@ -10,7 +10,9 @@ import {
   Settings,
   TimerReset,
   Users,
+  LogOut,
 } from "lucide-react";
+import { logoutUser } from "@/app/logout/actions";
 
 const navigation = [
   { href: "/dashboard", label: "Übersicht", icon: Compass },
@@ -53,11 +55,10 @@ export function AppSidebar() {
             <Link
               key={item.href}
               href={item.href}
-              className={`relative flex items-center gap-3 border px-4 py-3 text-base transition ${
-                isActive
+              className={`relative flex items-center gap-3 border px-4 py-3 text-base transition ${isActive
                   ? "rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border-[#d8aa5b]/25 bg-[#d8aa5b]/12 font-semibold text-white shadow-lg shadow-black/20"
                   : "rounded-[0.9rem_1.6rem_1.6rem_1.6rem] border-transparent text-slate-400 hover:border-[#d8aa5b]/15 hover:bg-slate-950/25 hover:text-[#f0d08a]"
-              }`}
+                }`}
             >
               <Icon size={21} strokeWidth={1.8} />
               {item.label}
@@ -81,11 +82,10 @@ export function AppSidebar() {
         <Link
           href="/einstellungen"
           aria-label="Konto und Einstellungen öffnen"
-          className={`flex items-center gap-3 rounded-[0_2rem_2rem_2rem] border p-4 shadow-lg shadow-black/25 transition ${
-            pathname === "/einstellungen"
+          className={`flex items-center gap-3 rounded-[0_2rem_2rem_2rem] border p-4 shadow-lg shadow-black/25 transition ${pathname === "/einstellungen"
               ? "border-[#d8aa5b]/45 bg-[linear-gradient(145deg,_rgba(91,52,38,0.72),_rgba(15,23,42,0.78))]"
               : "border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(91,52,38,0.5),_rgba(15,23,42,0.75))] hover:border-[#d8aa5b]/40"
-          }`}
+            }`}
         >
           <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#d8aa5b]/25 bg-[#d8aa5b]/10 text-sm font-bold text-[#f0d08a]">
             DU
@@ -102,6 +102,15 @@ export function AppSidebar() {
             strokeWidth={1.8}
           />
         </Link>
+        <form action={logoutUser} className="mt-3">
+          <button
+            type="submit"
+            className="flex w-full items-center gap-3 rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/20 bg-slate-950/30 px-4 py-3 text-slate-300 transition hover:border-[#d8aa5b]/40 hover:text-[#f0d08a]"
+          >
+            <LogOut size={20} strokeWidth={1.8} />
+            Abmelden
+          </button>
+        </form>
       </div>
     </aside>
   );

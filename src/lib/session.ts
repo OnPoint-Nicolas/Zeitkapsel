@@ -6,6 +6,9 @@ import {
 import { prisma } from "./prisma";
 import { redirect } from "next/navigation";
 
+
+
+
 const SESSION_COOKIE_NAME = "session";
 
 export async function createSession(userId: string) {
@@ -62,4 +65,19 @@ export async function requireUser() {
     }
 
     return user;
+}
+
+export async function deleteSession() {
+    const cookieStore = await cookies();
+    const token = cookieStore.get(SESSION_COOKIE_NAME)?.value;
+
+    if (token) {
+        const tokenHash = hashSessionToken(token);
+
+        await prisma.session.deleteMany({
+            where: { tokenHash },
+        });
+    }
+
+    cookieStore.delete(SESSION_COOKIE_NAME);
 }
