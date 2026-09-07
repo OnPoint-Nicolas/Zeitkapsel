@@ -13,7 +13,7 @@ export async function loginUser(formData: FormData) {
     }
 
     const trimmedEmail = email.trim().toLowerCase();
-    const trimmedPassword = password.trim();
+    const passwordValue = password;
 
     const user = await prisma.user.findUnique({
         where: {
@@ -26,7 +26,7 @@ export async function loginUser(formData: FormData) {
     }
 
     const passwordIsValid = await bcrypt.compare(
-        trimmedPassword,
+        passwordValue,
         user.passwordHash
     );
 

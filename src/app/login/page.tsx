@@ -70,6 +70,7 @@ export default async function LoginPage({
               id="email"
               name="email"
               type="email"
+              required
               placeholder="E-Mail-Adresse eingeben"
               className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
             />
@@ -86,6 +87,7 @@ export default async function LoginPage({
               id="password"
               name="password"
               type="password"
+              required
               placeholder="Passwort eingeben"
               className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
             />

@@ -51,71 +51,84 @@ export default async function RegisterPage({
           </p>
         )}
 
-        <form action={registerUser} className="mt-8 grid gap-4">
-          <div>
-            <label
-              htmlFor="name"
-              className="mb-2 block text-sm font-medium text-slate-200"
-            >
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="Dein Name"
-              className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="mb-2 block text-sm font-medium text-slate-200"
-            >
-              E-Mail-Adresse
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="du@beispiel.de"
-              className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="password"
-              className="mb-2 block text-sm font-medium text-slate-200"
-            >
-              Passwort
-            </label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Mindestens 8 Zeichen"
-              className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="mt-3 inline-flex items-center justify-center gap-2 rounded-[1rem_1.6rem_1.6rem_1.6rem] bg-[#d8aa5b] px-4 py-3 text-center font-semibold text-slate-950 transition hover:bg-[#f0d08a]"
+        {error === "ungueltige-eingaben" && (
+          <p
+            role="alert"
+            className="mt-6 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-200"
           >
-            <UserPlus size={18} strokeWidth={2} />
-            Konto erstellen
-          </button>
-        </form>
+            Bitte gib einen Namen, eine gültige E-Mail-Adresse und ein Passwort mit mindestens 8 Zeichen ein.
+          </p>
+        )}
 
-        <Link
-          href="/login"
-          className="mt-6 inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-[#f0d08a]"
-        >
-          <ArrowLeft size={16} />
-          Zur Anmeldung
-        </Link>
+          <form action={registerUser} className="mt-8 grid gap-4">
+            <div>
+              <label
+                htmlFor="name"
+                className="mb-2 block text-sm font-medium text-slate-200"
+              >
+                Name
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                placeholder="Dein Name"
+                className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="email"
+                className="mb-2 block text-sm font-medium text-slate-200"
+              >
+                E-Mail-Adresse
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                placeholder="du@beispiel.de"
+                className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
+              />
+            </div>
+
+            <div>
+              <label
+                htmlFor="password"
+                className="mb-2 block text-sm font-medium text-slate-200"
+              >
+                Passwort
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                required
+                minLength={8}
+                placeholder="Mindestens 8 Zeichen"
+                className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="mt-3 inline-flex items-center justify-center gap-2 rounded-[1rem_1.6rem_1.6rem_1.6rem] bg-[#d8aa5b] px-4 py-3 text-center font-semibold text-slate-950 transition hover:bg-[#f0d08a]"
+            >
+              <UserPlus size={18} strokeWidth={2} />
+              Konto erstellen
+            </button>
+          </form>
+
+          <Link
+            href="/login"
+            className="mt-6 inline-flex items-center gap-2 text-sm text-slate-400 transition hover:text-[#f0d08a]"
+          >
+            <ArrowLeft size={16} />
+            Zur Anmeldung
+          </Link>
       </section>
     </main>
   );

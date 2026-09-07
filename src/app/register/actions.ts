@@ -14,15 +14,15 @@ export async function registerUser(formData: FormData) {
         typeof email !== "string" ||
         typeof password !== "string"
     ) {
-        throw new Error("Ungültige Eingaben.");
+        redirect("/register?error=ungueltige-eingaben");
     }
 
     const trimmedName = name.trim();
     const trimmedEmail = email.trim().toLowerCase();
-    const trimmedPassword = password.trim();
+    const passwordValue = password;
 
-    if (!trimmedName || !trimmedEmail || trimmedPassword.length < 8) {
-        throw new Error("Name, E-Mail und Passwort mit mindestens 8 Zeichen sind erforderlich.");
+    if (!trimmedName || !trimmedEmail || passwordValue.length < 8) {
+        redirect("/register?error=ungueltige-eingaben");
     }
 
     const existingUser = await prisma.user.findUnique({
@@ -32,7 +32,7 @@ export async function registerUser(formData: FormData) {
     if (existingUser) {
         redirect("/register?error=email-vergeben");
     }
-    const passwordHash = await bcrypt.hash(trimmedPassword, 12);
+    const passwordHash = await bcrypt.hash(passwordValue, 12);
     const user = await prisma.user.create({
         data: {
             name: trimmedName,
