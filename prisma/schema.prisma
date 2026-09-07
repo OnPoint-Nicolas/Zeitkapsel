@@ -19,6 +19,7 @@ model User {
   passwordHash String
   createdAt    DateTime  @default(now())
   sessions     Session[]
+  capsules     Capsule[]
 }
 
 model Session {
@@ -28,5 +29,19 @@ model Session {
   createdAt DateTime @default(now())
 
   userId String
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Capsule {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  openAt      DateTime
+  kind        String
+  isArchived  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
