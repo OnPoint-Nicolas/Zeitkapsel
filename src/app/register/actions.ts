@@ -2,7 +2,7 @@
 import { prisma } from "@/lib/prisma";
 import { createSession } from "@/lib/session";
 import bcrypt from "bcryptjs";
-import {redirect} from "next/navigation";
+import { redirect } from "next/navigation";
 
 export async function registerUser(formData: FormData) {
     const name = formData.get("name");
@@ -25,6 +25,13 @@ export async function registerUser(formData: FormData) {
         throw new Error("Name, E-Mail und Passwort mit mindestens 8 Zeichen sind erforderlich.");
     }
 
+    const existingUser = await prisma.user.findUnique({
+        where: { email: trimmedEmail },
+    });
+
+    if (existingUser) {
+        redirect("/register?error=email-vergeben");
+    }
     const passwordHash = await bcrypt.hash(trimmedPassword, 12);
     const user = await prisma.user.create({
         data: {

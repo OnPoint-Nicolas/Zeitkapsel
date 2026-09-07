@@ -4,7 +4,12 @@ import { registerUser } from "./actions";
 
 
 
-export default function RegisterPage() {
+export default async function RegisterPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
   return (
     <main className="grid min-h-screen place-items-center bg-[radial-gradient(circle_at_12%_10%,_rgba(216,170,91,0.16),_transparent_22%),radial-gradient(circle_at_88%_18%,_rgba(48,112,166,0.22),_transparent_30%),linear-gradient(135deg,_#141024_0%,_#081324_48%,_#050814_100%)] px-6 py-10 text-slate-100">
       <section className="relative w-full max-w-md overflow-hidden rounded-[0_2.3rem_2rem_2rem] border border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(91,52,38,0.36),_rgba(15,23,42,0.78))] p-8 shadow-2xl shadow-black/35">
@@ -36,6 +41,15 @@ export default function RegisterPage() {
             Erstelle dein Konto, um eigene Zeitkapseln anzulegen und später wiederzufinden.
           </p>
         </div>
+
+        {error === "email-vergeben" && (
+          <p
+            role="alert"
+            className="mt-6 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-200"
+          >
+            Für diese E-Mail-Adresse gibt es bereits ein Konto.
+          </p>
+        )}
 
         <form action={registerUser} className="mt-8 grid gap-4">
           <div>

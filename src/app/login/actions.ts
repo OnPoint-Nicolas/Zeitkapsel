@@ -9,7 +9,7 @@ export async function loginUser(formData: FormData) {
     const password = formData.get("password");
 
     if (typeof email !== "string" || typeof password !== "string") {
-        throw new Error("Ungültige Eingaben.");
+        redirect("/login?error=ungueltige-eingaben");
     }
 
     const trimmedEmail = email.trim().toLowerCase();
@@ -22,7 +22,7 @@ export async function loginUser(formData: FormData) {
     });
 
     if (!user) {
-        throw new Error("E-Mail oder Passwort ist falsch.");
+        redirect("/login?error=falsche-zugangsdaten");
     }
 
     const passwordIsValid = await bcrypt.compare(
@@ -31,7 +31,7 @@ export async function loginUser(formData: FormData) {
     );
 
     if (!passwordIsValid) {
-        throw new Error("E-Mail oder Passwort ist falsch.");
+        redirect("/login?error=falsche-zugangsdaten");
     }
 
     await createSession(user.id);
