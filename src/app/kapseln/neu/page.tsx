@@ -1,24 +1,22 @@
 import Link from "next/link";
-import { ArrowLeft, CalendarDays, FileText, Save } from "lucide-react";
+import { CalendarDays, FileText, Save } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { requireUser } from "@/lib/session";
+import { createCapsule } from "./actions";
 
-export default async function NeueKapselPage() {
+export default async function NeueKapselPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
   await requireUser();
+  const { error } = await searchParams;
   return (
-     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
+    <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />
 
       <section className="min-h-screen min-w-0 flex-1 bg-[radial-gradient(circle_at_12%_10%,_rgba(216,170,91,0.16),_transparent_22%),radial-gradient(circle_at_88%_18%,_rgba(48,112,166,0.22),_transparent_30%),linear-gradient(135deg,_#141024_0%,_#081324_48%,_#050814_100%)] px-6 py-10 lg:px-12">
         <div className="mx-auto max-w-4xl">
-          <Link
-            href="/kapseln"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-400 transition hover:text-[#f0d08a]"
-          >
-            <ArrowLeft size={17} />
-            Zurück zu allen Zeitkapseln
-          </Link>
-
           <div className="mt-10 flex flex-wrap items-end justify-between gap-6">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
@@ -43,7 +41,12 @@ export default async function NeueKapselPage() {
             </div>
           </div>
 
-          <form className="relative mt-10 overflow-hidden rounded-[0_2.4rem_2rem_2rem] border border-[#d8aa5b]/20 bg-[radial-gradient(circle_at_20%_10%,_rgba(240,208,138,0.18),_transparent_25%),linear-gradient(145deg,_rgba(91,52,38,0.42),_rgba(15,23,42,0.78))] p-6 shadow-2xl shadow-black/35 sm:p-8">
+          <form action={createCapsule} className="relative mt-10 overflow-hidden rounded-[0_2.4rem_2rem_2rem] border border-[#d8aa5b]/20 bg-[radial-gradient(circle_at_20%_10%,_rgba(240,208,138,0.18),_transparent_25%),linear-gradient(145deg,_rgba(91,52,38,0.42),_rgba(15,23,42,0.78))] p-6 shadow-2xl shadow-black/35 sm:p-8">
+            {error === "ungueltige-eingaben" && (
+              <p role="alert" className="mb-6 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-200">
+                Bitte gib einen Titel und ein gültiges Öffnungsdatum in der Zukunft ein.
+              </p>
+            )}
             <div className="grid gap-6">
               <div>
                 <label
@@ -55,6 +58,8 @@ export default async function NeueKapselPage() {
 
                 <input
                   id="title"
+                  name="title"
+                  required
                   type="text"
                   placeholder="Zum Beispiel: Brief an mein zukünftiges Ich"
                   className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
@@ -71,13 +76,14 @@ export default async function NeueKapselPage() {
 
                 <textarea
                   id="message"
+                  name="message"
                   rows={8}
                   placeholder="Was möchte ich für später festhalten?"
                   className="w-full resize-none rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-[#d8aa5b]/60"
                 />
               </div>
 
-              <div className="grid gap-6 sm:grid-cols-2">
+              <div>
                 <div>
                   <label
                     htmlFor="openDate"
@@ -95,40 +101,25 @@ export default async function NeueKapselPage() {
 
                     <input
                       id="openDate"
+                      name="openDate"
+                      required
                       type="date"
                       className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 py-3 pl-12 pr-4 text-slate-100 outline-none focus:border-[#d8aa5b]/60"
                     />
                   </div>
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="recipient"
-                    className="mb-2 block text-sm font-medium text-slate-200"
-                  >
-                    Empfänger
-                  </label>
-
-                  <select
-                    id="recipient"
-                    defaultValue="self"
-                    className="w-full rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-[#d8aa5b]/15 bg-slate-950/40 px-4 py-3 text-slate-100 outline-none focus:border-[#d8aa5b]/60"
-                  >
-                    <option value="self">Für mich selbst</option>
-                    <option value="person">Für eine bestimmte Person</option>
-                  </select>
-                </div>
               </div>
             </div>
 
             <div className="mt-8 flex flex-wrap gap-4 border-t border-[#d8aa5b]/10 pt-6">
-              <Link
-                href="/kapseln"
+              <button
+                type="submit"
                 className="inline-flex items-center gap-2 rounded-[1rem_1.7rem_1.7rem_1.7rem] bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
               >
                 <Save size={18} strokeWidth={2} />
                 Kapsel speichern
-              </Link>
+              </button>
 
               <Link
                 href="/kapseln"

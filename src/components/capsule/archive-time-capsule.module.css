@@ -1,0 +1,120 @@
+.component {
+  --motion: cubic-bezier(.22, .72, .2, 1);
+  width: min(100%, 900px);
+  margin-inline: auto;
+  border-top: 1px solid #d1bc8a24;
+  color: #e8dac0;
+}
+
+.scene {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(ellipse at 50% 52%, #52635c15, transparent 62%);
+}
+
+.edition {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font: 12px Georgia, serif;
+  letter-spacing: .25em;
+  color: #c6b18980;
+}
+
+.artwork {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.cap {
+  transform-origin: 400px 254px;
+  transition: transform 950ms var(--motion) 550ms;
+}
+
+.capShadow {
+  transition: opacity 500ms ease 550ms;
+}
+
+.dial {
+  transform-origin: 400px 251px;
+  transition: transform 350ms var(--motion) 1500ms;
+}
+
+.leftLatch,
+.rightLatch {
+  transition: transform 300ms var(--motion) 1500ms;
+}
+
+.leftLatch { transform-origin: 280px 350px; }
+.rightLatch { transform-origin: 520px 350px; }
+
+.keepsakes {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: transform 550ms var(--motion), opacity 450ms ease;
+}
+
+.photograph {
+  transform: rotate(0);
+  transform-origin: 440px 420px;
+  transition: transform 450ms var(--motion);
+}
+
+.ambientLight { opacity: .13; transition: opacity 1000ms ease; }
+.innerLight { opacity: 0; transition: opacity 800ms ease; }
+
+.component[data-open="true"] .leftLatch { transform: rotate(37deg) translateX(-5px); transition-delay: 0ms; }
+.component[data-open="true"] .rightLatch { transform: rotate(-37deg) translateX(5px); transition-delay: 0ms; }
+.component[data-open="true"] .dial { transform: scaleX(.72); transition-delay: 0ms; }
+.component[data-open="true"] .cap { transform: translate(103px, -154px) rotate(14deg); transition-delay: 280ms; }
+.component[data-open="true"] .capShadow { opacity: 0; transition-delay: 280ms; }
+.component[data-open="true"] .keepsakes { opacity: 1; transform: translateY(-105px); transition-delay: 850ms; }
+.component[data-open="true"] .photograph { transform: rotate(6deg); transition-delay: 1050ms; }
+.component[data-open="true"] .ambientLight { opacity: .5; }
+.component[data-open="true"] .innerLight { opacity: .7; }
+
+.controls {
+  display: grid;
+  justify-items: center;
+  padding-inline: 16px;
+  margin-top: -24px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 48px;
+  min-width: 226px;
+  padding: 12px 24px;
+  border: 1px solid #c3ad7d70;
+  border-radius: 6px;
+  background: linear-gradient(#b69c661c, #a58a5610);
+  box-shadow: inset 0 1px #e4d4a512, 0 5px 14px #0002;
+  color: #e2d3b3;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 180ms ease, border-color 180ms ease;
+}
+.button:hover:not([aria-disabled="true"]) { background: #b49a652c; border-color: #ddc895a0; }
+.button:focus-visible { outline: 2px solid #dcc391; outline-offset: 5px; }
+.button:disabled { cursor: not-allowed; opacity: .55; }
+.status { min-height: 18px; margin: 14px 0 0; color: #b3aaa0; font-size: 12px; }
+.memory { min-height: 76px; opacity: 0; transition: opacity 300ms ease; text-align: center; }
+.memory p { max-width: 380px; margin: 20px 0; font: italic 16px/1.7 Georgia, serif; color: #d3bea1; }
+.component[data-phase="open"] .memory { opacity: 1; }
+
+@media (max-width: 540px) {
+  .scene { margin-inline: -20px; }
+  .edition { top: 16px; font-size: 10px; }
+  .controls { margin-top: 0; }
+  .button { min-width: 210px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .component *, .component[data-open="true"] * { transition: none; }
+}
