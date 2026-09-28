@@ -59,3 +59,22 @@ export async function restoreCapsule(formData: FormData) {
   });
   redirect("/kapseln");
 }
+
+export async function deleteCapsule(formData: FormData) {
+  const user = await requireUser();
+  const id = formData.get("id");
+
+  if (typeof id !== "string") {
+    redirect("/archiv");
+  }
+
+  await prisma.capsule.deleteMany({
+    where: {
+      id,
+      userId: user.id,
+      isArchived: true,
+    },
+  });
+
+  redirect("/archiv");
+}
