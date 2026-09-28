@@ -2,18 +2,52 @@ import Link from "next/link";
 import { Clock3, Plus, Vault } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { requireUser } from "@/lib/session";
-const stats = [
-  ["0", "Zeitkapseln"],
-  ["0", "Versiegelt"],
-  ["0", "Geöffnet"],
-  ["–", "Nächste Öffnung"],
-];
+import { prisma } from "@/lib/prisma";
+import { CapsuleCard } from "@/components/capsule/CapsuleCard";
 
 export default async function DashboardPage() {
 
-  await requireUser();
+  const user = await requireUser();
+  const capsules = await prisma.capsule.findMany({
+    where: {
+      userId: user.id,
+      isArchived: false,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const recentCapsules = capsules.slice(0, 3);
+
+  const totalCapsules = capsules.length;
+  const openedCapsules = capsules.filter(
+    (capsule) => capsule.openAt <= new Date()
+  ).length;
+  const sealedCapsules = totalCapsules - openedCapsules;
+  const futureCapsules = capsules.filter(
+    (capsule) => capsule.openAt > new Date()
+  );
+  const soonCapsules = futureCapsules.filter(
+    (capsule) => capsule.openAt.getTime() <= Date.now() + 30 * 24 * 60 * 60 * 1000
+  ).length;
+  const nextCapsule = futureCapsules.sort(
+    (a, b) => a.openAt.getTime() - b.openAt.getTime()
+  )[0];
+  const stats = [
+    [String(totalCapsules), "Zeitkapseln"],
+    [String(sealedCapsules), "Versiegelt"],
+    [String(openedCapsules), "Geöffnet"],
+    [
+      nextCapsule
+        ? new Intl.DateTimeFormat("de-DE", { dateStyle: "medium" }).format(nextCapsule.openAt)
+        : "–",
+      "Nächste Öffnung",
+    ],
+  ];
 
   return (
+
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />
 
@@ -77,11 +111,8 @@ export default async function DashboardPage() {
               <div className="absolute left-0 top-0 h-24 w-24 bg-[radial-gradient(circle_at_top_left,_rgba(240,208,138,0.15),_transparent_70%)]" />
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
-                    Nächster Moment
-                  </p>
                   <h2 className="mt-3 font-serif text-2xl font-semibold text-white">
-                    Noch keine Kapsel geplant
+                    {nextCapsule ? nextCapsule.title : "Noch keine Kapsel geplant"}
                   </h2>
                 </div>
 
@@ -91,16 +122,17 @@ export default async function DashboardPage() {
               </div>
 
               <p className="mt-4 max-w-xl leading-7 text-slate-400">
-                Sobald ich eine Zeitkapsel erstelle, erscheint hier der nächste
-                wichtige Öffnungstermin.
+                {nextCapsule
+                  ? nextCapsule.description || "Diese Kapsel wartet auf ihren Öffnungstag."
+                  : "Erstelle eine Zeitkapsel, damit hier dein nächster Öffnungstermin erscheint."}
               </p>
 
               <Link
-                href="/kapseln/neu"
+                href={nextCapsule ? `/kapseln/${nextCapsule.id}` : "/kapseln/neu"}
                 className="mt-7 inline-flex items-center gap-2 rounded-[1rem_1.6rem_1.6rem_1.6rem] border border-[#d8aa5b]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#d8aa5b] hover:text-[#d8aa5b]"
               >
                 <Plus size={18} strokeWidth={2} />
-                Erste Kapsel erstellen
+                {nextCapsule ? "Kapsel ansehen" : "Erste Kapsel erstellen"}
               </Link>
             </article>
 
@@ -123,17 +155,17 @@ export default async function DashboardPage() {
               <div className="mt-6 space-y-4 border-t border-[#d8aa5b]/10 pt-5 text-sm">
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Versiegelt</span>
-                  <span className="font-semibold text-slate-100">0</span>
+                  <span className="font-semibold text-slate-100">{sealedCapsules}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Bald geöffnet</span>
-                  <span className="font-semibold text-[#d8aa5b]">0</span>
+                  <span className="font-semibold text-[#d8aa5b]">{soonCapsules}</span>
                 </div>
 
                 <div className="flex items-center justify-between">
                   <span className="text-slate-400">Geöffnet</span>
-                  <span className="font-semibold text-violet-200">0</span>
+                  <span className="font-semibold text-violet-200">{openedCapsules}</span>
                 </div>
               </div>
             </article>
@@ -158,16 +190,23 @@ export default async function DashboardPage() {
               </Link>
             </div>
 
-            <div className="mt-5 rounded-[0_2.4rem_2rem_2rem] border border-dashed border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(15,23,42,0.58),_rgba(39,34,73,0.48))] p-10 text-center shadow-xl shadow-black/20 backdrop-blur">
-              <p className="font-serif text-xl font-semibold text-white">
-                Meine Sammlung ist noch leer.
-              </p>
+            {recentCapsules.length === 0 ? (
+              <div className="mt-5 rounded-[0_2.4rem_2rem_2rem] border border-dashed border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(15,23,42,0.58),_rgba(39,34,73,0.48))] p-10 text-center shadow-xl shadow-black/20 backdrop-blur">
+                <p className="font-serif text-xl font-semibold text-white">
+                  Meine Sammlung ist noch leer.
+                </p>
 
-              <p className="mt-2 text-sm text-slate-400">
-                Neue Zeitkapseln erscheinen nach dem Speichern in dieser
-                Übersicht.
-              </p>
-            </div>
+                <p className="mt-2 text-sm text-slate-400">
+                  Neue Zeitkapseln erscheinen nach dem Speichern in dieser Übersicht.
+                </p>
+              </div>
+            ) : (
+              <div className="mt-5 grid gap-6 xl:grid-cols-3">
+                {recentCapsules.map((capsule) => (
+                  <CapsuleCard key={capsule.id} capsule={capsule} />
+                ))}
+              </div>
+            )}
           </section>
         </div>
       </section>
