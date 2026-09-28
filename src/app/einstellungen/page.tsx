@@ -1,4 +1,4 @@
-import { Bell, Trash2, UserRound } from "lucide-react";
+import { Trash2, UserRound } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { requireUser } from "@/lib/session";
 import { deleteAccount } from "./actions";
@@ -30,7 +30,7 @@ export default async function EinstellungenPage({
             fest, wie ich über kommende Öffnungsdaten informiert werden möchte.
           </p>
 
-          <section className="mt-12 grid gap-6 xl:grid-cols-2">
+          <section className="mt-12 max-w-3xl gap-6 xl:grid-cols-2">
             <article className="relative rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
               <div className="flex items-center gap-4">
                 <div className="grid h-14 w-14 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
@@ -70,40 +70,7 @@ export default async function EinstellungenPage({
               </div>
             </article>
 
-            <article className="relative rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
-              <div className="flex items-center gap-4">
-                <div className="grid h-14 w-14 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
-                  <Bell size={25} strokeWidth={1.8} />
-                </div>
-
-                <div>
-                  <h2 className="font-serif text-2xl font-semibold text-white">
-                    Erinnerungen
-                  </h2>
-
-                  <p className="text-slate-400">
-                    Hinweise rund um kommende Öffnungsdaten.
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-7 space-y-4 border-t border-[#d8aa5b]/10 pt-5">
-                <div className="flex justify-between gap-6">
-                  <span className="text-slate-400">Vor dem Öffnungsdatum</span>
-                  <span className="text-right text-slate-100">-</span>
-                </div>
-
-                <div className="flex justify-between gap-6">
-                  <span className="text-slate-400">Am Öffnungstag</span>
-                  <span className="text-right text-slate-100">-</span>
-                </div>
-
-                <div className="flex justify-between gap-6">
-                  <span className="text-slate-400">Kapsel-Übersicht</span>
-                  <span className="text-right text-slate-100">sichtbar</span>
-                </div>
-              </div>
-            </article>
+          
           </section>
           <section className="mt-10 rounded-[0_2rem_2rem_2rem] border border-red-300/20 bg-red-950/10 p-7 shadow-2xl shadow-black/20">
             <div className="flex items-start gap-4">
