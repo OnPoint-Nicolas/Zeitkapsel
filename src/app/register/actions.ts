@@ -42,6 +42,6 @@ export async function registerUser(formData: FormData) {
 
     });
     await createSession(user.id);
-    redirect("/dashboard");
+    redirect("/onboarding");
 
 }
