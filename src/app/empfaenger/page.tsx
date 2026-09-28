@@ -1,36 +1,24 @@
+import Link from "next/link";
 import { UserRound } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { requireUser } from "@/lib/session";
+import { prisma } from "@/lib/prisma";
 
-const empfaenger = [
-  {
-    name: "Ich selbst",
-    relation: "Eigene Zukunft",
-    capsules: 3,
-    items: ["Brief an mich selbst", "Ziele für mein zukünftiges Ich"],
-  },
-  {
-    name: "Mila Bergmann",
-    relation: "Familie",
-    capsules: 1,
-    items: ["Brief an Mila zum 18. Geburtstag"],
-  },
-  {
-    name: "Jonas Bergmann",
-    relation: "Vertrauensperson",
-    capsules: 1,
-    items: ["Projekt Nordlicht"],
-  },
-  {
-    name: "Familie",
-    relation: "Gruppe",
-    capsules: 1,
-    items: ["Sommer 2019 in Lissabon"],
-  },
-];
+
 
 export default async function EmpfaengerPage() {
-  await requireUser();
+  const user = await requireUser();
+
+  const capsules = await prisma.capsule.findMany({
+    where: {
+      userId: user.id,
+      isArchived: false,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
   return (
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />
@@ -46,55 +34,58 @@ export default async function EmpfaengerPage() {
           </h1>
 
           <p className="mt-3 max-w-3xl text-lg leading-8 text-slate-300">
-            Hier verwalte ich, für wen meine Zeitkapseln gedacht sind. Eine
-            Kapsel kann für mich selbst bestimmt sein oder einer bestimmten
-            Person zugeordnet werden.
+            Hier sehe ich, für wen meine aktiven Zeitkapseln bestimmt sind. In der
+            aktuellen Version sind sie meinem eigenen Konto zugeordnet.
           </p>
-
-          <section className="mt-12 grid gap-6 xl:grid-cols-2">
-            {empfaenger.map((person) => (
-              <article
-                key={person.name}
-                className="relative rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur"
-              >
-                <div className="flex items-start justify-between gap-5">
-                  <div className="flex items-center gap-4">
-                    <div className="grid h-14 w-14 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
-                      <UserRound size={25} strokeWidth={1.8} />
-                    </div>
-
-                    <div>
-                      <h2 className="font-serif text-2xl font-semibold text-white">
-                        {person.name}
-                      </h2>
-
-                      <p className="text-slate-400">{person.relation}</p>
-                    </div>
+          
+          <section className="mt-12">
+            <article className="relative rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
+              <div className="flex flex-wrap items-start justify-between gap-5">
+                <div className="flex items-center gap-4">
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
+                    <UserRound size={25} strokeWidth={1.8} />
                   </div>
 
-                  <span className="rounded-full border border-[#d8aa5b]/35 px-4 py-2 text-sm font-medium text-[#d8aa5b]">
-                    {person.capsules} Kapsel{person.capsules === 1 ? "" : "n"}
-                  </span>
+                  <div>
+                    <h2 className="font-serif text-2xl font-semibold text-white">
+                      {user.name || "Ich selbst"}
+                    </h2>
+
+                    <p className="text-slate-400">
+                      {user.email}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="mt-7 border-t border-[#d8aa5b]/10 pt-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
-                    Zugeordnete Kapseln
-                  </p>
+                <span className="rounded-full border border-[#d8aa5b]/35 px-4 py-2 text-sm font-medium text-[#d8aa5b]">
+                  {capsules.length} Kapsel{capsules.length === 1 ? "" : "n"}
+                </span>
+              </div>
 
-                  <div className="mt-4 space-y-3">
-                    {person.items.map((item) => (
-                      <div
-                        key={item}
-                      className="rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-white/5 bg-slate-950/25 px-4 py-3 text-slate-300"
+              <div className="mt-7 border-t border-[#d8aa5b]/10 pt-5">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">
+                  Für mich gespeicherte Kapseln
+                </p>
+
+                {capsules.length === 0 ? (
+                  <p className="mt-4 text-slate-400">
+                    Noch keine Zeitkapseln vorhanden.
+                  </p>
+                ) : (
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                    {capsules.map((capsule) => (
+                      <Link
+                        key={capsule.id}
+                        href={`/kapseln/${capsule.id}`}
+                        className="rounded-[0.9rem_1.4rem_1.4rem_1.4rem] border border-white/5 bg-slate-950/25 px-4 py-3 text-slate-300 transition hover:border-[#d8aa5b]/30 hover:text-[#f0d08a]"
                       >
-                        {item}
-                      </div>
+                        {capsule.title}
+                      </Link>
                     ))}
                   </div>
-                </div>
-              </article>
-            ))}
+                )}
+              </div>
+            </article>
           </section>
         </div>
       </section>
