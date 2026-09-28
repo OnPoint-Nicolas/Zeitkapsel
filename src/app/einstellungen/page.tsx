@@ -1,9 +1,16 @@
-import { Bell, UserRound } from "lucide-react";
+import { Bell, Trash2, UserRound } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
 import { requireUser } from "@/lib/session";
+import { deleteAccount } from "./actions";
 
-export default async function EinstellungenPage() {
-  await requireUser();
+export default async function EinstellungenPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
+  const user = await requireUser();
+
   return (
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
       <AppSidebar />
@@ -44,13 +51,15 @@ export default async function EinstellungenPage() {
               <div className="mt-7 space-y-4 border-t border-[#d8aa5b]/10 pt-5">
                 <div className="flex justify-between gap-6">
                   <span className="text-slate-400">Name</span>
-                  <span className="text-right text-slate-100">Dein Konto</span>
+                  <span className="text-right text-slate-100">
+                    {user.name || "Kein Name angegeben"}
+                  </span>
                 </div>
 
                 <div className="flex justify-between gap-6">
                   <span className="text-slate-400">E-Mail</span>
                   <span className="text-right text-slate-100">
-                    -
+                    {user.email}
                   </span>
                 </div>
 
@@ -95,6 +104,61 @@ export default async function EinstellungenPage() {
                 </div>
               </div>
             </article>
+          </section>
+          <section className="mt-10 rounded-[0_2rem_2rem_2rem] border border-red-300/20 bg-red-950/10 p-7 shadow-2xl shadow-black/20">
+            <div className="flex items-start gap-4">
+              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl border border-red-300/20 bg-red-400/10 text-red-200">
+                <Trash2 size={25} strokeWidth={1.8} />
+              </div>
+
+              <div>
+                <h2 className="font-serif text-2xl font-semibold text-white">
+                  Konto endgültig löschen
+                </h2>
+
+                <p className="mt-2 max-w-2xl leading-7 text-slate-400">
+                  Dabei werden das Konto, alle Sessions und sämtliche Zeitkapseln
+                  dauerhaft gelöscht. Dieser Vorgang kann nicht rückgängig gemacht
+                  werden.
+                </p>
+              </div>
+            </div>
+
+            {error === "ungueltige-bestaetigung" && (
+              <p
+                role="alert"
+                className="mt-6 max-w-xl rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-200"
+              >
+                Gib zur Bestätigung genau LÖSCHEN ein.
+              </p>
+            )}
+
+            <form action={deleteAccount} className="mt-7 max-w-xl">
+              <label
+                htmlFor="confirmation"
+                className="block text-sm font-medium text-slate-200"
+              >
+                Gib zur Bestätigung LÖSCHEN ein
+              </label>
+
+              <input
+                id="confirmation"
+                name="confirmation"
+                type="text"
+                required
+                autoComplete="off"
+                className="mt-3 w-full rounded-2xl border border-red-300/20 bg-black/20 px-4 py-3 text-white outline-none transition placeholder:text-slate-600 focus:border-red-300/50"
+                placeholder="LÖSCHEN"
+              />
+
+              <button
+                type="submit"
+                className="mt-4 inline-flex items-center gap-2 rounded-full border border-red-300/30 bg-red-400/10 px-5 py-3 font-semibold text-red-200 transition hover:bg-red-400/20"
+              >
+                <Trash2 size={18} />
+                Konto endgültig löschen
+              </button>
+            </form>
           </section>
         </div>
       </section>
