@@ -75,7 +75,9 @@ export async function ArchiveCollection() {
                   </h2>
 
                   <p className="mt-4 leading-7 text-slate-400">
-                    {capsule.description || "Keine Vorschau vorhanden."}
+                    {capsule.openAt <= new Date()
+                      ? capsule.description || "Keine Vorschau vorhanden."
+                      : "Diese Nachricht bleibt bis zum Öffnungsdatum versiegelt."}
                   </p>
 
                   <div className="mt-7 flex flex-wrap items-center justify-between gap-4 border-t border-[#d8aa5b]/10 pt-4">

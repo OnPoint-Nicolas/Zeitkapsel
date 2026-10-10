@@ -9,7 +9,15 @@ import { updateCapsule } from "../actions";
 export default async function BearbeitenPage({ params }: { params: Promise<{ id: string }> }) {
   const user = await requireUser();
   const { id } = await params;
-  const capsule = await prisma.capsule.findFirst({ where: { id, userId: user.id, isArchived: false } });
+  const capsule = await prisma.capsule.findFirst({
+    where: {
+      id,
+      userId: user.id,
+      isArchived: false,
+      openAt: { lte: new Date() },
+    },
+  });
+  
   if (!capsule) notFound();
 
   const updateAction = updateCapsule.bind(null, capsule.id);

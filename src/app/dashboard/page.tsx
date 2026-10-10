@@ -123,9 +123,8 @@ export default async function DashboardPage() {
 
               <p className="mt-4 max-w-xl leading-7 text-slate-400">
                 {nextCapsule
-                  ? nextCapsule.description || "Diese Kapsel wartet auf ihren Öffnungstag."
-                  : "Erstelle eine Zeitkapsel, damit hier dein nächster Öffnungstermin erscheint."}
-              </p>
+                  ? "Diese Kapsel wartet versiegelt auf ihren Öffnungstag."
+                  : "Erstelle eine Zeitkapsel, damit hier dein nächster Öffnungstermin erscheint."}</p>
 
               <Link
                 href={nextCapsule ? `/kapseln/${nextCapsule.id}` : "/kapseln/neu"}

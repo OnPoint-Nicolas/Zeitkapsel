@@ -28,7 +28,13 @@ export async function updateCapsule(id: string, formData: FormData) {
   if (!input) redirect(`/kapseln/${id}/bearbeiten?error=ungueltige-eingaben`);
 
   const result = await prisma.capsule.updateMany({
-    where: { id, userId: user.id, isArchived: false },
+    where: {
+      id,
+      userId: user.id,
+      isArchived: false,
+      openAt: { lte: new Date() },
+    },
+
     data: input,
   });
 

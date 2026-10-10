@@ -55,7 +55,9 @@ export function CapsuleCard({ capsule }: { capsule: Capsule }) {
             </h2>
 
             <p className="mt-4 min-h-24 leading-7 text-slate-300">
-                {capsule.description || "Keine Vorschau vorhanden."}
+                {status === "geöffnet"
+                    ? capsule.description || "Keine Vorschau vorhanden."
+                    : "Diese Nachricht bleibt bis zum Öffnungsdatum versiegelt."}
             </p>
 
             <div className="mt-7 border-t border-[#d8aa5b]/10 pt-4">
