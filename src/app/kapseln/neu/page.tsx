@@ -9,11 +9,11 @@ export default async function NeueKapselPage({
 }: {
   searchParams: Promise<{ error?: string }>;
 }) {
-  await requireUser();
+  const user = await requireUser();
   const { error } = await searchParams;
   return (
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
-      <AppSidebar />
+      <AppSidebar user={user} />
 
       <section className="min-h-screen min-w-0 flex-1 bg-[radial-gradient(circle_at_12%_10%,_rgba(216,170,91,0.16),_transparent_22%),radial-gradient(circle_at_88%_18%,_rgba(48,112,166,0.22),_transparent_30%),linear-gradient(135deg,_#141024_0%,_#081324_48%,_#050814_100%)] px-6 py-10 lg:px-12">
         <div className="mx-auto max-w-4xl">

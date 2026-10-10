@@ -22,7 +22,7 @@ const navigation = [
   { href: "/archiv", label: "Archiv", icon: Archive },
 ];
 
-export function AppSidebar() {
+export function AppSidebar({ user }: { user: { name: string | null; email: string } }) {
   const pathname = usePathname();
 
   return (
@@ -88,12 +88,12 @@ export function AppSidebar() {
             }`}
         >
           <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[#d8aa5b]/25 bg-[#d8aa5b]/10 text-sm font-bold text-[#f0d08a]">
-            DU
+            {(user.name?.trim() || user.email).slice(0, 2).toUpperCase()}
           </div>
 
           <div className="min-w-0 flex-1">
-            <p className="font-medium text-slate-100">Dein Konto</p>
-            <p className="text-sm text-slate-400">Nicht angemeldet</p>
+            <p className="truncate font-medium text-slate-100">{user.name?.trim() || "Dein Konto"}</p>
+            <p className="truncate text-sm text-slate-400">{user.email}</p>
           </div>
 
           <Settings

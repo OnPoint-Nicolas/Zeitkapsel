@@ -19,17 +19,18 @@ export default async function DashboardPage() {
   });
 
   const recentCapsules = capsules.slice(0, 3);
+  const now = new Date();
 
   const totalCapsules = capsules.length;
   const openedCapsules = capsules.filter(
-    (capsule) => capsule.openAt <= new Date()
+    (capsule) => capsule.openAt <= now
   ).length;
   const sealedCapsules = totalCapsules - openedCapsules;
   const futureCapsules = capsules.filter(
-    (capsule) => capsule.openAt > new Date()
+    (capsule) => capsule.openAt > now
   );
   const soonCapsules = futureCapsules.filter(
-    (capsule) => capsule.openAt.getTime() <= Date.now() + 30 * 24 * 60 * 60 * 1000
+    (capsule) => capsule.openAt.getTime() <= now.getTime() + 30 * 24 * 60 * 60 * 1000
   ).length;
   const nextCapsule = futureCapsules.sort(
     (a, b) => a.openAt.getTime() - b.openAt.getTime()
@@ -49,7 +50,7 @@ export default async function DashboardPage() {
   return (
 
     <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
-      <AppSidebar />
+      <AppSidebar user={user} />
 
       <section className="min-h-screen min-w-0 flex-1 bg-[radial-gradient(circle_at_12%_10%,_rgba(216,170,91,0.16),_transparent_22%),radial-gradient(circle_at_88%_18%,_rgba(48,112,166,0.22),_transparent_30%),linear-gradient(135deg,_#141024_0%,_#081324_48%,_#050814_100%)] px-6 py-10 lg:px-12">
         <div className="mx-auto max-w-6xl">
