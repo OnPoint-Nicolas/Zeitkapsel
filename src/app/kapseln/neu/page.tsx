@@ -32,6 +32,12 @@ export default async function NeueKapselPage({
                 Nachricht fest und lege fest, wann sie wieder geöffnet werden
                 darf.
               </p>
+
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-slate-400">
+                Nach dem Erstellen sind Korrekturen für 10 % der Wartezeit
+                möglich, höchstens jedoch sieben Tage. Danach und nach dem
+                Öffnen bleibt die Kapsel unveränderlich.
+              </p>
             </div>
 
             <div className="rounded-[1rem_1.7rem_1.7rem_1.7rem] border border-[#d8aa5b]/25 bg-[linear-gradient(145deg,_#5b3426,_#2b1814)] p-1 shadow-lg shadow-black/30">

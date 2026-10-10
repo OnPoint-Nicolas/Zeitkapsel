@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { prisma } from "../src/lib/prisma";
+import { calculateEditUntil } from "../src/lib/capsule-edit-window";
 
 const demoEmail = process.env.SEED_USER_EMAIL?.trim().toLowerCase();
 
@@ -41,10 +42,12 @@ async function main() {
 
   for (const example of examples) {
     const id = `demo-${user.id}-${example.key}`;
+    const createdAt = new Date();
+    const openAt = new Date(createdAt.getTime() + example.daysFromNow * day);
     const data = {
       title: example.title,
       description: example.description,
-      openAt: new Date(Date.now() + example.daysFromNow * day),
+      openAt,
       kind: "Nachricht",
       isArchived: false,
       userId: user.id,
@@ -52,8 +55,13 @@ async function main() {
 
     await prisma.capsule.upsert({
       where: { id },
-      update: data,
-      create: { id, ...data },
+      update: {},
+      create: {
+        id,
+        ...data,
+        createdAt,
+        editUntil: calculateEditUntil(createdAt, openAt),
+      },
     });
   }
 

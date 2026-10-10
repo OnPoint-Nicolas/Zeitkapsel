@@ -16,7 +16,9 @@ function readCapsuleInput(formData: FormData) {
   const openAt = new Date(openDate);
   const cleanTitle = title.trim();
 
-  if (!cleanTitle || Number.isNaN(openAt.getTime())) return null;
+  if (!cleanTitle || Number.isNaN(openAt.getTime()) || openAt <= new Date()) {
+    return null;
+  }
 
   return { title: cleanTitle, description: message.trim() || null, openAt };
 }
@@ -27,12 +29,14 @@ export async function updateCapsule(id: string, formData: FormData) {
 
   if (!input) redirect(`/kapseln/${id}/bearbeiten?error=ungueltige-eingaben`);
 
+  const now = new Date();
   const result = await prisma.capsule.updateMany({
     where: {
       id,
       userId: user.id,
       isArchived: false,
-      openAt: { lte: new Date() },
+      openAt: { gt: now },
+      editUntil: { gt: now },
     },
 
     data: input,

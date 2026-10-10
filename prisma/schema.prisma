@@ -37,6 +37,7 @@ model Capsule {
   title       String
   description String?
   openAt      DateTime
+  editUntil   DateTime
   kind        String
   isArchived  Boolean  @default(false)
   createdAt   DateTime @default(now())

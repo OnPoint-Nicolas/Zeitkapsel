@@ -1,6 +1,7 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import { requireUser } from "@/lib/session";
+import { calculateEditUntil } from "@/lib/capsule-edit-window";
 import { redirect } from "next/navigation";
 
 export async function createCapsule(formData: FormData) {
@@ -29,11 +30,15 @@ export async function createCapsule(formData: FormData) {
         redirect("/kapseln/neu?error=ungueltige-eingaben");
     }
 
+    const createdAt = new Date();
+
     await prisma.capsule.create({
         data: {
             title: cleanTitle,
             description: cleanDescription || null,
             openAt,
+            createdAt,
+            editUntil: calculateEditUntil(createdAt, openAt),
             kind: "Nachricht",
             userId: user.id,
         },

@@ -22,6 +22,11 @@ const dateFormatter = new Intl.DateTimeFormat("de-DE", {
   dateStyle: "long",
 });
 
+const dateTimeFormatter = new Intl.DateTimeFormat("de-DE", {
+  dateStyle: "medium",
+  timeStyle: "short",
+});
+
 export async function CapsuleDetail({ id }: { id: string }) {
   const user = await requireUser();
 
@@ -37,7 +42,9 @@ export async function CapsuleDetail({ id }: { id: string }) {
     notFound();
   }
 
-  const isOpened = capsule.openAt <= new Date();
+  const now = new Date();
+  const isOpened = capsule.openAt <= now;
+  const canEdit = !isOpened && capsule.editUntil > now;
 
   const message =
     capsule.description ||
@@ -137,14 +144,19 @@ export async function CapsuleDetail({ id }: { id: string }) {
             </section>
 
             <div className="mt-8 flex flex-wrap gap-3 border-t border-[#d8aa5b]/10 pt-6">
-              {isOpened && (
-                <Link
-                  href={`/kapseln/${capsule.id}/bearbeiten`}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#d8aa5b]/30 px-4 py-2 text-sm text-[#f0d08a] transition hover:bg-[#d8aa5b]/10"
-                >
-                  <Pencil size={16} />
-                  Bearbeiten
-                </Link>
+              {canEdit && (
+                <div className="flex flex-col gap-1">
+                  <Link
+                    href={`/kapseln/${capsule.id}/bearbeiten`}
+                    className="inline-flex items-center gap-2 rounded-full border border-[#d8aa5b]/30 px-4 py-2 text-sm text-[#f0d08a] transition hover:bg-[#d8aa5b]/10"
+                  >
+                    <Pencil size={16} />
+                    Bearbeiten
+                  </Link>
+                  <span className="text-xs text-slate-400">
+                    Korrektur möglich bis {dateTimeFormatter.format(capsule.editUntil)} Uhr
+                  </span>
+                </div>
               )}
 
               <form action={archiveCapsule}>
