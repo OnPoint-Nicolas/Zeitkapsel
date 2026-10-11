@@ -1,214 +1,94 @@
 import Link from "next/link";
-import { Clock3, Plus, Vault } from "lucide-react";
 import { AppSidebar } from "@/components/app-sidebar";
+import { CapsuleArtwork } from "@/components/capsule/CapsuleArtwork";
+import { CapsuleCard } from "@/components/capsule/CapsuleCard";
 import { requireUser } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
-import { CapsuleCard } from "@/components/capsule/CapsuleCard";
 
 export default async function DashboardPage() {
-
   const user = await requireUser();
   const capsules = await prisma.capsule.findMany({
-    where: {
-      userId: user.id,
-      isArchived: false,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
+    where: { userId: user.id, isArchived: false },
+    orderBy: { createdAt: "desc" },
   });
-
-  const recentCapsules = capsules.slice(0, 3);
   const now = new Date();
-
-  const totalCapsules = capsules.length;
-  const openedCapsules = capsules.filter(
-    (capsule) => capsule.openAt <= now
-  ).length;
-  const sealedCapsules = totalCapsules - openedCapsules;
-  const futureCapsules = capsules.filter(
-    (capsule) => capsule.openAt > now
-  );
-  const soonCapsules = futureCapsules.filter(
-    (capsule) => capsule.openAt.getTime() <= now.getTime() + 30 * 24 * 60 * 60 * 1000
-  ).length;
-  const nextCapsule = futureCapsules.sort(
-    (a, b) => a.openAt.getTime() - b.openAt.getTime()
-  )[0];
-  const stats = [
-    [String(totalCapsules), "Zeitkapseln"],
-    [String(sealedCapsules), "Versiegelt"],
-    [String(openedCapsules), "Geöffnet"],
-    [
-      nextCapsule
-        ? new Intl.DateTimeFormat("de-DE", { dateStyle: "medium" }).format(nextCapsule.openAt)
-        : "–",
-      "Nächste Öffnung",
-    ],
-  ];
-
+  const future = capsules
+    .filter((c) => c.openAt > now)
+    .sort((a, b) => a.openAt.getTime() - b.openAt.getTime());
+  const next = future[0];
+  const days = next
+    ? Math.ceil((next.openAt.getTime() - now.getTime()) / 86400000)
+    : 0;
   return (
-
-    <main className="flex min-h-screen bg-[#070b1a] text-slate-100">
+    <main className="app-shell">
       <AppSidebar user={user} />
-
-      <section className="min-h-screen min-w-0 flex-1 bg-[radial-gradient(circle_at_12%_10%,_rgba(216,170,91,0.16),_transparent_22%),radial-gradient(circle_at_88%_18%,_rgba(48,112,166,0.22),_transparent_30%),linear-gradient(135deg,_#141024_0%,_#081324_48%,_#050814_100%)] px-6 py-10 lg:px-12">
-        <div className="mx-auto max-w-6xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
-            Übersicht
+      <section className="capsule-hero">
+        <div className="hero-copy">
+          <p className="eyebrow">Deine persönliche Zeitkapselsammlung</p>
+          <h1>
+            Heute bewahren.
+            <br />
+            Später wiederfinden.
+          </h1>
+          <p>
+            {next
+              ? "Ein Gedanke von heute. Ein Wiedersehen, wenn seine Zeit gekommen ist."
+              : "Was möchtest du deinem zukünftigen Ich mitgeben? Bewahre es in deiner ersten Zeitkapsel."}
           </p>
-
-          <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <h1 className="font-serif text-4xl font-semibold tracking-tight text-white sm:text-5xl">
-                Guten Abend.
-              </h1>
-
-              <p className="mt-3 max-w-2xl text-lg leading-8 text-slate-300">
-                Hier sehe ich meine wichtigsten Zeitkapseln, kommende
-                Öffnungsdaten und den aktuellen Stand meiner Sammlung.
+          <Link href="/kapseln/neu" className="primary-button">
+            + Neue Zeitkapsel
+          </Link>
+          {next && (
+            <div className="mt-8 border-l border-[#dca27766] pl-4">
+              <p className="eyebrow">
+                Als Nächstes · in {days} {days === 1 ? "Tag" : "Tagen"}
+              </p>
+              <Link
+                href={"/kapseln/" + next.id}
+                className="mt-2 block font-serif text-xl"
+              >
+                {next.title} →
+              </Link>
+              <p className="mt-1 text-xs text-stone-400">
+                {new Intl.DateTimeFormat("de-DE", {
+                  dateStyle: "long",
+                  timeZone: "Europe/Berlin",
+                }).format(next.openAt)}
               </p>
             </div>
-
-            <Link
-              href="/kapseln/neu"
-              className="inline-flex items-center gap-2 rounded-[1rem_1.7rem_1.7rem_1.7rem] bg-[#d8aa5b] px-5 py-3 font-semibold text-slate-950 shadow-lg shadow-[#d8aa5b]/10 transition hover:bg-[#f0d08a]"
-            >
-              <Plus size={19} strokeWidth={2} />
-              Neue Zeitkapsel
-            </Link>
-          </div>
-
-          <section className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {stats.map(([number, label], index) => {
-              const cardLayout = [
-                "rounded-[0_2.5rem_1.25rem_2.5rem]",
-                "rounded-[0_2.5rem_1.25rem_2.5rem]",
-                "rounded-[0_2.5rem_1.25rem_2.5rem]",
-                "rounded-[0_2.5rem_1.25rem_2.5rem]",
-              ][index];
-
-              return (
-                <article
-                  key={label}
-                  className={`relative min-h-36 overflow-hidden border border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(98,57,37,0.55),_rgba(15,23,42,0.82))] p-6 shadow-[0_18px_40px_rgba(0,0,0,0.28)] backdrop-blur ${cardLayout}`}
-                >
-                  <div className="absolute bottom-0 left-0 h-px w-2/3 bg-gradient-to-r from-[#d8aa5b]/60 to-transparent" />
-
-                  <p className="font-serif text-3xl font-semibold text-[#e5bd72]">
-                    {number}
-                  </p>
-
-                  <p className="mt-3 text-sm tracking-wide text-slate-300">
-                    {label}
-                  </p>
-                </article>
-              );
-            })}
-          </section>
-
-          <section className="mt-10 grid gap-6 xl:grid-cols-[1.35fr_0.65fr]">
-            <article className="relative overflow-hidden rounded-[0_2.4rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
-              <div className="absolute left-0 top-0 h-24 w-24 bg-[radial-gradient(circle_at_top_left,_rgba(240,208,138,0.15),_transparent_70%)]" />
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <h2 className="mt-3 font-serif text-2xl font-semibold text-white">
-                    {nextCapsule ? nextCapsule.title : "Noch keine Kapsel geplant"}
-                  </h2>
-                </div>
-
-                <span className="grid h-12 w-12 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
-                  <Clock3 size={23} strokeWidth={1.8} />
-                </span>
-              </div>
-
-              <p className="mt-4 max-w-xl leading-7 text-slate-400">
-                {nextCapsule
-                  ? "Diese Kapsel wartet versiegelt auf ihren Öffnungstag."
-                  : "Erstelle eine Zeitkapsel, damit hier dein nächster Öffnungstermin erscheint."}</p>
-
-              <Link
-                href={nextCapsule ? `/kapseln/${nextCapsule.id}` : "/kapseln/neu"}
-                className="mt-7 inline-flex items-center gap-2 rounded-[1rem_1.6rem_1.6rem_1.6rem] border border-[#d8aa5b]/25 px-5 py-3 font-semibold text-slate-100 transition hover:border-[#d8aa5b] hover:text-[#d8aa5b]"
-              >
-                <Plus size={18} strokeWidth={2} />
-                {nextCapsule ? "Kapsel ansehen" : "Erste Kapsel erstellen"}
-              </Link>
-            </article>
-
-            <article className="relative overflow-hidden rounded-[0_2.4rem_2rem_2rem] border border-[#d8aa5b]/15 bg-[linear-gradient(145deg,_rgba(91,52,38,0.35),_rgba(15,23,42,0.72))] p-7 shadow-2xl shadow-black/30 backdrop-blur">
-              <div className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-2xl border border-[#d8aa5b]/20 bg-[#d8aa5b]/10 text-[#d8aa5b]">
-                  <Vault size={22} strokeWidth={1.8} />
-                </span>
-
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
-                    Status
-                  </p>
-                  <h2 className="font-serif text-2xl font-semibold text-white">
-                    Sammlung
-                  </h2>
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-4 border-t border-[#d8aa5b]/10 pt-5 text-sm">
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Versiegelt</span>
-                  <span className="font-semibold text-slate-100">{sealedCapsules}</span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Bald geöffnet</span>
-                  <span className="font-semibold text-[#d8aa5b]">{soonCapsules}</span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-slate-400">Geöffnet</span>
-                  <span className="font-semibold text-violet-200">{openedCapsules}</span>
-                </div>
-              </div>
-            </article>
-          </section>
-
-          <section className="mt-10">
-            <div className="flex items-end justify-between gap-4">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
-                  Zuletzt erstellt
-                </p>
-                <h2 className="mt-3 font-serif text-2xl font-semibold text-white">
-                  Meine Zeitkapseln
-                </h2>
-              </div>
-
-              <Link
-                href="/kapseln"
-                className="text-sm font-semibold text-[#d8aa5b] transition hover:text-[#f0d08a]"
-              >
-                Alle ansehen
-              </Link>
-            </div>
-
-            {recentCapsules.length === 0 ? (
-              <div className="mt-5 rounded-[0_2.4rem_2rem_2rem] border border-dashed border-[#d8aa5b]/20 bg-[linear-gradient(145deg,_rgba(15,23,42,0.58),_rgba(39,34,73,0.48))] p-10 text-center shadow-xl shadow-black/20 backdrop-blur">
-                <p className="font-serif text-xl font-semibold text-white">
-                  Meine Sammlung ist noch leer.
-                </p>
-
-                <p className="mt-2 text-sm text-slate-400">
-                  Neue Zeitkapseln erscheinen nach dem Speichern in dieser Übersicht.
-                </p>
-              </div>
-            ) : (
-              <div className="mt-5 grid gap-6 xl:grid-cols-3">
-                {recentCapsules.map((capsule) => (
-                  <CapsuleCard key={capsule.id} capsule={capsule} />
-                ))}
-              </div>
-            )}
-          </section>
+          )}
         </div>
+        <div className="hero-art">
+          <CapsuleArtwork />
+        </div>
+      </section>
+      <section className="app-content">
+        <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Persönlich bewahrt</p>
+            <h2 className="mt-2 font-serif text-3xl">
+              Meine letzten Erinnerungen
+            </h2>
+          </div>
+          <Link href="/kapseln" className="quiet-link">
+            Alle {capsules.length} Kapseln →
+          </Link>
+        </div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {capsules.slice(0, 3).map((c) => (
+            <CapsuleCard key={c.id} capsule={c} now={now.getTime()} />
+          ))}
+        </div>
+        {!capsules.length && (
+          <p className="py-8 text-stone-400">
+            Deine Sammlung beginnt mit einem Gedanken. Erstelle deine erste
+            Kapsel oben.
+          </p>
+        )}
+        <p className="mt-7 text-xs text-stone-400">
+          {future.length} versiegelt · {capsules.length - future.length}{" "}
+          geöffnet
+        </p>
       </section>
     </main>
   );

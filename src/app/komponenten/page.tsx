@@ -1,3 +1,4 @@
+import { notFound } from "next/navigation";
 import { FileText, Lock, Mail, Unlock } from "lucide-react";
 import {
   AevumLogo,
@@ -6,10 +7,7 @@ import {
   BRAND_NAME,
 } from "@/components/capsule/AevumLogo";
 import { LeatherBadge } from "@/components/capsule/LeatherBadge";
-import {
-  CapsuleStatus,
-  MetalCard,
-} from "@/components/capsule/MetalCard";
+import { CapsuleStatus, MetalCard } from "@/components/capsule/MetalCard";
 
 const metalSamples = [
   {
@@ -111,6 +109,7 @@ const metalSamples = [
 ];
 
 export default function KomponentenPage() {
+  if (process.env.NODE_ENV === "production") notFound();
   return (
     <main className="min-h-screen overflow-hidden bg-[radial-gradient(circle_at_17%_15%,_rgba(92,44,125,0.25),_transparent_30%),radial-gradient(circle_at_84%_10%,_rgba(24,83,137,0.27),_transparent_32%),linear-gradient(135deg,_#070914,_#130f28_48%,_#061426)] px-6 py-12 text-slate-100 lg:px-12">
       <div className="mx-auto grid max-w-7xl gap-16">

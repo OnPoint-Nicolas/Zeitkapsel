@@ -27,9 +27,9 @@ export default async function OnboardingPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_12%_10%,_rgba(216,170,91,0.16),_transparent_22%),radial-gradient(circle_at_88%_18%,_rgba(48,112,166,0.22),_transparent_30%),linear-gradient(135deg,_#141024_0%,_#081324_48%,_#050814_100%)] px-6 py-12 text-slate-100">
+    <main className="min-h-screen bg-[#131c16] px-6 py-12 text-stone-100">
       <section className="mx-auto max-w-5xl">
-        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#d8aa5b]">
+        <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#dca277]">
           Willkommen bei Aevum
         </p>
 
@@ -37,7 +37,7 @@ export default async function OnboardingPage() {
           Hallo {user.name || "Zeitreisender"}.
         </h1>
 
-        <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+        <p className="mt-5 max-w-2xl text-lg leading-8 text-stone-300">
           In drei Schritten entsteht deine erste persönliche Zeitkapsel.
         </p>
 
@@ -48,14 +48,14 @@ export default async function OnboardingPage() {
             return (
               <article
                 key={step.title}
-                className="rounded-[0_2rem_2rem_2rem] border border-[#d8aa5b]/20 bg-black/20 p-7 shadow-2xl shadow-black/25"
+                className="rounded-lg border border-[#dca277]/20 bg-black/20 p-7 shadow-2xl shadow-black/25"
               >
                 <div className="flex items-center justify-between">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl border border-[#d8aa5b]/25 bg-[#d8aa5b]/10 text-[#f0d08a]">
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl border border-[#dca277]/25 bg-[#dca277]/10 text-[#ecc09b]">
                     <Icon size={23} />
                   </span>
 
-                  <span className="font-serif text-2xl text-[#d8aa5b]/60">
+                  <span className="font-serif text-2xl text-[#dca277]/60">
                     0{index + 1}
                   </span>
                 </div>
@@ -64,7 +64,7 @@ export default async function OnboardingPage() {
                   {step.title}
                 </h2>
 
-                <p className="mt-4 leading-7 text-slate-400">
+                <p className="mt-4 leading-7 text-stone-400">
                   {step.description}
                 </p>
               </article>
@@ -75,14 +75,14 @@ export default async function OnboardingPage() {
         <div className="mt-10 flex flex-wrap gap-4">
           <Link
             href="/kapseln/neu"
-            className="rounded-full bg-[#d8aa5b] px-6 py-3 font-semibold text-slate-950 transition hover:bg-[#f0d08a]"
+            className="rounded-full bg-[#dca277] px-6 py-3 font-semibold text-stone-950 transition hover:bg-[#ecc09b]"
           >
             Erste Zeitkapsel erstellen
           </Link>
 
           <Link
             href="/dashboard"
-            className="rounded-full border border-[#d8aa5b]/30 px-6 py-3 font-semibold text-slate-200 transition hover:border-[#d8aa5b] hover:text-[#f0d08a]"
+            className="rounded-full border border-[#dca277]/30 px-6 py-3 font-semibold text-stone-200 transition hover:border-[#dca277] hover:text-[#ecc09b]"
           >
             Später zum Dashboard
           </Link>
