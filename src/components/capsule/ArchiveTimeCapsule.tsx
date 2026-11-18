@@ -69,11 +69,6 @@ export function ArchiveTimeCapsule({
                 ? "Darstellung schließen"
                 : "Kapsel öffnen"}
         </button>
-        {!locked && (
-          <p className="mt-3 text-xs text-stone-400">
-            Die Animation verändert weder Nachricht noch Öffnungsdatum.
-          </p>
-        )}
       </div>
       <div id={id}>
         {!locked && phase === "open" && (
